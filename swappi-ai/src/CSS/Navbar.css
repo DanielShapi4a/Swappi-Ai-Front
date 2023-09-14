@@ -1,0 +1,62 @@
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Left section styles (HamburgerMenu) */
+  .left-section {
+    flex: 1;
+  }
+  
+  /* Middle section styles (SearchBar) */
+  .middle-section {
+    flex: 2;
+  }
+  
+  /* Right section styles (ProfileArea) */
+  .right-section {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  /* Style for HamburgerMenu icon (you can adjust this as needed) */
+  .hamburger-menu img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  /* Style for focused SearchBar */
+  .search-bar.focused {
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
+  /* Style for ProfileArea buttons and user avatar (you can adjust this as needed) */
+  .profile-area button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .profile-area img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
