@@ -1,0 +1,43 @@
+/* Hamburger menu styles */
+.hamburger-menu {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px; /* Adjust margin as needed */
+}
+
+.hamburger-menu .menu-button img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Open state styles */
+.hamburger-menu.open .menu-options {
+  display: block;
+  position: absolute;
+  top: 95%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-options {
+  display: none;
+  background-color: #fff;
+}
+
+.menu-options.show {
+  display: block;
+}
+
+.menu-options ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-options .menu-item {
+  color: #000; /* Black text color */
+  padding: 10px;
+}
+
+/* Add any additional styling as needed */
