@@ -6,10 +6,15 @@ export const Button = styled.button`
   background-color: ${(props) => props.backgroundColor || '#007bff'};
   color: ${(props) => props.color || '#fff'};
   border: none;
-  border-radius: 4px;
+  border-radius: ${(props) => props.borderRadius || '4px'};
   padding: 5px 10px;
   cursor: pointer;
-  margin-left: ${(props) => props.marginLeft || '10px'};
+  margin-left: ${(props) => props.marginLeft || '0'}; 
+  margin-bottom: ${(props) => props.marginLeft || '30px'}; 
+  height: ${(props) => props.height || 'auto'};
+  width: ${(props) => props.width || 'auto'};
+  font-weight: ${(props) => props.fontWeight || 'normal'};
+  font-size: ${(props) => props.fontSize || 'inherit'};
 `;
 
 export const Avatar = styled.img`
