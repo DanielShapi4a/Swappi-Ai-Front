@@ -1,4 +1,5 @@
 import React from 'react';
+import CategoryImg from '../assets/images/Category.jpeg';
 
 function CustomDiv() {
   const divStyle = {
@@ -6,8 +7,9 @@ function CustomDiv() {
     borderRadius: '66px',
     width: '1314px',
     height: '300px',
-    display: 'flex',
-    justifyContent: 'space-between',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr', // Three columns
+    gap: '30px', // Add gap between items
     alignItems: 'center',
     padding: '20px',
     marginBottom: '50px',
@@ -22,10 +24,13 @@ function CustomDiv() {
 
   return (
     <div className="custom-div" style={divStyle}>
-      <div style={{ flex: 1, ...textStyle }}>
+      <div style={{ ...textStyle }}>
+        <img src={CategoryImg} style={{ borderRadius: '20px',  objectFit: 'cover' }} alt="Category" />
+      </div>
+      <div style={{ ...textStyle }}>
         <p>Experience the Future of Ticket Trading with AI-Powered Convenience</p>
       </div>
-      <div style={{ flex: 1, textAlign: 'center', ...textStyle }}>
+      <div style={{ textAlign: 'center', ...textStyle }}>
         <p>Secure and transparent transaction process that safeguards your payment and personal information.</p>
       </div>
     </div>

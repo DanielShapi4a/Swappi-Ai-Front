@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import Category from '../components/Category';
-import CategoryImg from '../assets/images/Category.jpeg';
 import CustomDiv from '../components/CustomDiv';
+import { Button, Avatar } from '../assets/styles'; // Import styled components from your styles.js
+import images from '../assets/images'; // Import image paths from your images.js
+import CategoryGrid from '../components/CategoryGrid';
+import CategoryImg from '../assets/images/Category.jpeg';
+
 
 const hotCategories = [
   {
@@ -58,24 +61,31 @@ const nonHotCategories = [
 ];
 
 function MainPage() {
-
   const [showNonHot, setShowNonHot] = useState(false);
-
-
 
   return (
     <div className="App">
       <Navbar style={{ marginBottom: '100px' }} />
 
-      <div className="main-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+      <div
+        className="main-content"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <h1
           style={{
             color: '#FDA77F',
             fontFamily: 'Syncopate',
             fontSize: '120px',
             fontStyle: 'normal',
-            fontWeight: '200',
-            lineHeight: '105px', /* 114.865% */
+            fontWeight: '300',
+            lineHeight: '105px',
+            width: '900px',
           }}
         >
           Unlock the world of ticket trading
@@ -84,75 +94,63 @@ function MainPage() {
           style={{
             color: '#1B729D',
             fontFamily: 'Syncopate',
-            fontSize: '32px',
+            fontSize: '50px',
             fontStyle: 'normal',
-            fontWeight: '400',
-            lineHeight: '70px', /* 218.75% */
+            fontWeight: '200',
+            lineHeight: '70px',
+            width: '700px',
           }}
         >
           Your One-Stop Marketplace for All Kinds Ticket Transactions
         </p>
-        <button
-          style={{
-            backgroundColor: '#FDA77F',
-            borderRadius: '35px',
-            height: '60px',
-            width: '316px',
-            color: '#fff',
-            borderColor: 'transparent',
-            cursor: 'pointer',
-            marginTop: '30px',
-            marginBottom: '100px', // Add margin-top for spacing
-          }}
+        <Button
+          backgroundColor="#FDA77F"
+          color="#fff"
+          borderRadius="35px"
+          height="60px"
+          width="300px" // Increase the width to accommodate the full text
+          borderColor="transparent"
+          cursor="pointer"
+          marginTop="30px"
+          marginBottom="100px"
+          fontWeight="bold"
+          fontSize="18px"
         >
           Begin your journey
-        </button>
-        <CustomDiv/>
- 
+        </Button>
 
+        <CustomDiv />
 
         {/* "HOT" Categories Section */}
-        <div className="categories-section" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-          {hotCategories.map((category, index) => (
-            <Category
-              key={index}
-              title={category.title}
-              description={category.description}
-              image={category.image}
-            />
-          ))}
-        </div>
+        <CategoryGrid categories={hotCategories} />
+
         {/* Filter Button for "NON HOT" Categories (on the left) */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', marginLeft: '30px', flexDirection: 'column' }}>
-          <button
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            flexDirection: 'column',
+            margin: '30px'
+          }}
+        >
+          <Button
             onClick={() => setShowNonHot(!showNonHot)}
-            style={{
-              backgroundColor: '#FDA77F',
-              borderRadius: '35px',
-              height: '60px',
-              width: '316px',
-              color: '#fff',
-              borderColor: 'transparent',
-              cursor: 'pointer',
-              marginBottom: '20px',
-              alignSelf: 'flex-start',
-            }}
+            backgroundColor="#FDA77F"
+            color="#fff"
+            borderRadius="35px"
+            height="60px"
+            width="316px"
+            borderColor="transparent"
+            cursor="pointer"
+            marginBottom="40px"
+            marginTop="40px"
+            alignSelf="flex-start"
+            label={showNonHot ? 'Hide NON HOT Categories' : 'Show NON HOT Categories'}
           >
-            {showNonHot ? 'Hide NON HOT Categories' : 'Show NON HOT Categories'}
-          </button>
+            Filter
+          </Button>
           {/* "NON HOT" Categories Section (conditionally displayed based on "showNonHot" state) */}
-          {showNonHot && (
-            <div className="categories-section" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {nonHotCategories.map((category, index) => (
-                <Category
-                  key={index}
-                  title={category.title}
-                  description={category.description}
-                  image={category.image}
-                />
-              ))}
-            </div>
-          )}
+          {showNonHot && <CategoryGrid categories={nonHotCategories} />}
         </div>
       </div>
     </div>
