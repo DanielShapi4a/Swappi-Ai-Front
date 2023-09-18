@@ -2,7 +2,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; /* Center vertically */
   background-color: #B1D573;
   color: #fff;
   padding: 10px 20px;
@@ -23,6 +23,12 @@
   display: flex; /* Add display:flex */
   justify-content: center; /* Center content horizontally */
   align-items: center; /* Center content vertically */
+}
+
+/* Right section styles (ProfileArea) */
+.right-section {
+  display: flex;
+  justify-content: center; /* Center content vertically */
 }
 
 /* Style for HamburgerMenu icon (you can adjust this as needed) */
