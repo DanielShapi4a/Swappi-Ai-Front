@@ -5,7 +5,10 @@ import { StyledButton, Avatar, MainContent, MainHeading, SubHeading } from '../a
 import images from '../assets/images'; // Import image paths from your images.js
 import CategoryGrid from '../components/CategoryGrid';
 import CategoryImg from '../assets/images/Category.jpeg';
+import Footer from '../components/Footer';
 
+
+{/*API Calls . get categories       */}
 const hotCategories = [
   {
     title: 'Category 1',
@@ -94,6 +97,7 @@ function MainPage() {
           {showNonHot && <CategoryGrid categories={nonHotCategories} />}
         </div>
       </MainContent>
+      <Footer/>
     </div>
   );
 }

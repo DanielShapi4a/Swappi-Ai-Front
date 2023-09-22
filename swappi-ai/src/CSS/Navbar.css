@@ -79,3 +79,28 @@
   border-radius: 50%;
   margin-right: 5px;
 }
+
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px; 
+  }
+
+  .middle-section {
+    flex: 1; 
+    justify-content: flex-start; 
+    padding: 5px; 
+  }
+
+  .middle-section.focused input.focused {
+    width: 100%; 
+  }
+
+  .profile-area {
+    display: none; /* Hide ProfileArea for smaller screens */
+  }
+
+  .hamburger-menu img {
+    margin-right: 0; /* Remove right margin for HamburgerMenu icon */
+  }
+}

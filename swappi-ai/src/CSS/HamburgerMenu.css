@@ -57,3 +57,14 @@
   border-radius: 10px; /* Increased border radius on hover */
   color: #fff; /* Text color on hover */
 }
+
+@media (max-width: 768px) {
+  .hamburger-menu {
+    margin-left: 0; 
+    padding: 10px; 
+  }
+
+  .menu-item {
+    padding: 10px; 
+  }
+}
