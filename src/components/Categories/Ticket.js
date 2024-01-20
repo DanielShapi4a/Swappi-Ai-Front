@@ -1,3 +1,4 @@
+// Ticket.js
 import React from 'react';
 import './Ticket.css';
 import { Link } from 'react-router-dom';

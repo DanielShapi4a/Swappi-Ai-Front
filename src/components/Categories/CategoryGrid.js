@@ -60,15 +60,17 @@ function CategoryGrid({ selectedCategory }) {
         <div>No categories found.</div>
       ) : (
         <div className="category-grid">
-          {categories.map((category) => (
-            <Ticket
-              key={category.id}
-              id={category.id}
-              title={category.title}
-              description={category.description}
-              image={category.image}
-            />
-          ))}
+          {categories.map((category) => {
+            return (
+              <Ticket
+                key={category.id}
+                id={category._id}
+                title={category.title}
+                description={category.description}
+                image={category.image}
+              />
+            );
+          })}
         </div>
       )}
       {!hasMore && <div>No more products to load.</div>}
