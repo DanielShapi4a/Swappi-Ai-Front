@@ -1,0 +1,40 @@
+
+
+/* Container styling */
+.ticket-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Title styling */
+.ticket-details-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Description styling */
+.ticket-details-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Price styling */
+.ticket-details-price {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Other details styling */
+.ticket-details-details {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Image styling */
+.ticket-details-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
