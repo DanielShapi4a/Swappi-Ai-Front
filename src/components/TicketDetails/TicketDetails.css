@@ -3,8 +3,10 @@
 /* Container styling */
 .ticket-details-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
+  background-color: #135291;
+  border-radius: 20px;
 }
 
 /* Title styling */
@@ -37,4 +39,5 @@
   max-width: 100%;
   height: auto;
   margin-bottom: 20px;
+  border-radius: 20px;
 }
