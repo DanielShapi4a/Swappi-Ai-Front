@@ -31,8 +31,12 @@ export async function getCategoryNames() {
 }
 
 export async function getSpecific(id) {
-  return (await fetch(`${API_URL}/products/specific/${id}`, { credentials: "include" })).json();
+  const response = await fetch(`${API_URL}/products/specific/${id}`, { credentials: "include" });
+  const data = await response.json();
+  console.log('getSpecific data:', data);
+  return data;
 }
+
 
 export async function getRandomProducts() {
   return (await fetch(`${API_URL}/random`)).json();
