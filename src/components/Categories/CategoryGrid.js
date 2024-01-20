@@ -63,6 +63,7 @@ function CategoryGrid({ selectedCategory }) {
           {categories.map((category) => (
             <Ticket
               key={category.id}
+              id={category.id}
               title={category.title}
               description={category.description}
               image={category.image}
