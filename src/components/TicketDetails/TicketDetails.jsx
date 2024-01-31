@@ -39,16 +39,16 @@ function TicketDetails() {
         ) : (
           <div>
             <h2 className="ticket-details-title">{ticket.title}</h2>
-            <p className="ticket-details-description">{ticket.description}</p>
-            <p className="ticket-details-price">Price: ${ticket.price}</p>
-            <p className="ticket-details-details">City: {ticket.city}</p>
-            <p className="ticket-details-details">Category: {ticket.category}</p>
-            <p className="ticket-details-details">Seller: {ticket.seller.name}</p>
             <img
               src={ticket.image}
               alt={ticket.title}
               className="ticket-details-image"
             />
+            <p className="ticket-details-description">{ticket.description}</p>
+            <p className="ticket-details-price">Price: ${ticket.price}</p>
+            <p className="ticket-details-details">City: {ticket.city}</p>
+            <p className="ticket-details-details">Category: {ticket.category}</p>
+            <p className="ticket-details-details">Seller: {ticket.seller.name}</p>
             {/* Add more details as needed */}
           </div>
         )}
