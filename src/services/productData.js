@@ -1,12 +1,12 @@
 import { API_URL } from "./constants";
 
 export async function getAll(page = 1, category = null, query = '') {
-  let url = `${API_URL}/products?page=${page}`;
+  let url = `${API_URL}/tickets?page=${page}`;
 
   if (query) {
     url += `&search=${query}`;
   } else if (category && category !== 'all') {
-    url = `${API_URL}/products/${category}?page=${page}`;
+    url = `${API_URL}/tickets/${category}?page=${page}`;
   }
 
   try {
@@ -21,7 +21,7 @@ export async function getAll(page = 1, category = null, query = '') {
 
 export async function getCategoryNames() {
   try {
-    const response = await fetch(`${API_URL}/products/categories/names`, { credentials: "include" });
+    const response = await fetch(`${API_URL}/tickets/categories/names`, { credentials: "include" });
     const data = await response.json();
     return data.categoryNames;
   } catch (error) {
@@ -31,20 +31,20 @@ export async function getCategoryNames() {
 }
 
 export async function getSpecific(id) {
-  const response = await fetch(`${API_URL}/products/specific/${id}`, { credentials: "include" });
+  const response = await fetch(`${API_URL}/tickets/specific/${id}`, { credentials: "include" });
   const data = await response.json();
   console.log('getSpecific data:', data);
   return data;
 }
 
 
-export async function getRandomProducts() {
-  return (await fetch(`${API_URL}/random`)).json();
+export async function getRandomTicket() {
+  return (await fetch(`${API_URL}/tickets/random`)).json();
 }
 
-export async function createProduct(product) {
+export async function createTicket(product) {
   return (
-    await fetch(`${API_URL}/products/create`, {
+    await fetch(`${API_URL}/tickets/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,9 +55,9 @@ export async function createProduct(product) {
   ).json();
 }
 
-export async function editProduct(id, product) {
+export async function editTicket(id, product) {
   return (
-    await fetch(`${API_URL}/products/edit/${id}`, {
+    await fetch(`${API_URL}/tickets/edit/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -69,13 +69,13 @@ export async function editProduct(id, product) {
 }
 
 export async function activateSell(id) {
-  return (await fetch(`${API_URL}/products/enable/${id}`)).json();
+  return (await fetch(`${API_URL}/tickets/enable/${id}`)).json();
 }
 
 export async function archiveSell(id) {
-  return (await fetch(`${API_URL}/products/archive/${id}`)).json();
+  return (await fetch(`${API_URL}/tickets/archive/${id}`)).json();
 }
 
-export async function wishProduct(id) {
-  return (await fetch(`${API_URL}/products/wish/${id}`, { credentials: "include" })).json();
+export async function wishTicket(id) {
+  return (await fetch(`${API_URL}/tickets/wish/${id}`, { credentials: "include" })).json();
 }

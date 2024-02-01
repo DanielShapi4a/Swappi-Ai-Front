@@ -1,0 +1,62 @@
+/* LoginModal.css */
+.login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for the blur effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 30px; /* Adjusted padding for a slightly bigger modal */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    max-width: 300px; /* Set a maximum width to prevent it from becoming too large */
+    width: 100%;
+    height: 35%;
+    border-radius: 20px;
+    color: black;
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 15px;
+  }
+  
+  .modal-content label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .modal-content input {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .modal-content button {
+    margin-top: 20px;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 600px) {
+    .modal-content {
+      padding: 20px;
+      height: auto;
+    }
+  }
+  

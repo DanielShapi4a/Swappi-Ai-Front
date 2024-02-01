@@ -1,0 +1,58 @@
+/* SignInPage.css */
+.sign-in-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .sign-in-form {
+    max-width: 300px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sign-in-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .sign-in-form label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .sign-in-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .sign-in-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0;
+  }
+  
+  .sign-in-form button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 600px) {
+    .sign-in-form {
+      padding: 15px;
+    }
+  }
+  
