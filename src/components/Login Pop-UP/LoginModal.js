@@ -1,15 +1,17 @@
 // LoginModal.js
-
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { StyledButton } from '../../assets/styles.js';
+import './LoginModal.css'; // Import the CSS file for modal styles
 import SignInPage from '../../pages/SignInPage/SignInPage.jsx';
+import { Link } from 'react-router-dom';
+import { loginUser } from '../../services/userData.js'; // Import loginUser function
 
-const LoginModal = ({ onClose, setUserData }) => {
+const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [loginError, setLoginError] = useState(null);
 
   const handleLogin = async () => {
     // Validate email format
@@ -28,27 +30,26 @@ const LoginModal = ({ onClose, setUserData }) => {
       setPasswordError('');
     }
 
-    // Implement your login logic using the loginUser function from userData.js
-    const result = await loginUser(email, password);
+    try {
+      // Call the loginUser function from userData.js
+      const result = await loginUser(email, password);
 
-    // Check if login was successful
-    if (result.success) {
-      // Fetch user details after successful login
-      const userResult = await getUser();
+      console.log("Result Recieved from Back-End ",result);
 
-      if (userResult.success) {
-        // Update user details in the state or Redux store
-        setUserData(userResult.user);
-
-        // Close the modal after successful login
+      if (result.success) {
+        console.log('Login successful');
         onClose();
       } else {
-        // Handle error fetching user details
-        console.error('Error fetching user details:', userResult.message);
+        // Handle login failure
+        console.error('Login failed:', result.message);
+        setLoginError(result.message);
+        // You can update the state or display an error message to the user
       }
-    } else {
-      // Handle login error
-      console.error('Login failed:', result.message);
+    } catch (error) {
+      console.error('Error during login:', error.message);
+      setLoginError("Unexpected error during login");
+      // Handle unexpected errors during login
+      // You can update the state or display an error message to the user
     }
   };
 
@@ -73,9 +74,8 @@ const LoginModal = ({ onClose, setUserData }) => {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         {passwordError && <span className="error-message">{passwordError}</span>}
         <StyledButton onClick={handleLogin}>Login</StyledButton>
-        <Link to="/sign-in" style={{ marginTop: '10px', display: 'block', textAlign: 'center', color: 'blue' }}>
-          Sign-In here!
-        </Link>
+        {loginError && <div className='error-message'>{loginError}</div>}
+        <Link to="/sign-in" style={{ marginTop: '10px', display: 'block', textAlign: 'center', color: 'black' }}>Sign-In here! </Link>
       </div>
     </div>
   );

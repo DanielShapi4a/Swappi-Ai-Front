@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Avatar, StyledButton } from '../../assets/styles.js';
 import defaultProfileImage from '../../assets/images/default-profile-image.png';
 import { getUser } from '../../services/userData.js';
+import LoginModal from '../Login Pop-UP/LoginModal.js';
 
 const ProfileArea = ({ setUserData }) => {
   const [userData, setUserDataLocal] = useState(null);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   useEffect(() => {
     // Fetch user details when the component mounts
@@ -30,6 +32,14 @@ const ProfileArea = ({ setUserData }) => {
     setUserData(null); // Assuming setUserData is a function to update the user data in your state or Redux store
   };
 
+  const openLoginModal = () => {
+    setLoginModalOpen(true);
+  };
+
+  const closeLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+
   return (
     <div className="profile-area" style={{ display: 'flex', alignItems: 'center' }}>
       <Avatar src={userData ? userData.avatar || defaultProfileImage : defaultProfileImage} alt="User Avatar" size="48px" marginRight="10px" />
@@ -42,7 +52,8 @@ const ProfileArea = ({ setUserData }) => {
         ) : (
           <>
             <span>Welcome</span>
-            <StyledButton>Login Here</StyledButton>
+            <StyledButton onClick={openLoginModal}>Login Here</StyledButton>
+            {isLoginModalOpen && <LoginModal onClose={closeLoginModal} setUserData={setUserData} />}
           </>
         )}
       </>

@@ -14,27 +14,40 @@ export async function registerUser(userData) {
 }
 
 export async function loginUser(email, password) {
-  return await fetch(`${API_URL}/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(email, password),
-  }).then(async (response) => {
+  try {
+    const response = await fetch(`${API_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
+    });
+
     const result = await response.json();
-    console.log("API Call loginUser func:" ,result);
+
     if (response.ok) {
-      // Successful login, fetch user details
-      const userResult = await getUser();
-      if (userResult.success) {
-        result.user = userResult.user;
-      } else {
-        console.error('Error fetching user details:', userResult.message);
-      }
+      // Successful login
+      return {
+        success: true,
+        token: result.token,
+        user: result.user,
+      };
+    } else {
+      // Failed login
+      return {
+        success: false,
+        message: result.message || 'Login failed',
+      };
     }
-    return result;
-  });
+  } catch (error) {
+    // Error during fetch
+    console.error('Error during login:', error.message);
+    return {
+      success: false,
+      message: 'Error during login',
+    };
+  }
 }
 
 export async function getUser() {
