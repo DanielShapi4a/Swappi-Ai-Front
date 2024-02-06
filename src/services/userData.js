@@ -2,15 +2,29 @@
 
 import { API_URL } from "./constants";
 
+// userData.js
 export async function registerUser(userData) {
-  return await fetch(`${API_URL}/auth/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(userData),
-  }).json();
+  try {
+    const response = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(userData),
+    });
+
+    const result = await response.json();
+    console.log("Signe-IN response:", result)
+    if (response.ok) {
+      return { success: true };
+    } else {
+      return { success: false, message: result.message || 'Sign-in failed' };
+    }
+  } catch (error) {
+    console.error('Error during sign-in:', error.message);
+    return { success: false, message: 'Unexpected error during sign-in' };
+  }
 }
 
 export async function loginUser(email, password) {
