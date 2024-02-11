@@ -1,10 +1,9 @@
-// LoginModal.js
 import React, { useState } from 'react';
 import { StyledButton } from '../../assets/styles.js';
 import './LoginModal.css'; // Import the CSS file for modal styles
-import SignInPage from '../../pages/SignInPage/SignInPage.jsx';
 import { Link } from 'react-router-dom';
 import { loginUser } from '../../services/userData.js'; // Import loginUser function
+import { jwt_decode } from 'jwt-decode';
 
 const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState('');
@@ -34,22 +33,22 @@ const LoginModal = ({ onClose }) => {
       // Call the loginUser function from userData.js
       const result = await loginUser(email, password);
 
-      console.log("Result Recieved from Back-End ",result);
-
       if (result.success) {
-        console.log('Login successful');
-        onClose();
+        const userData = (result.user); // Decode JWT token to get user data
+        console.log("JWT DATA:",userData);
+
+        // Store the token in localStorage
+        localStorage.setItem('accessToken', result.token);
+
+        onClose(userData); // Pass decoded user data to the callback function
       } else {
         // Handle login failure
         console.error('Login failed:', result.message);
         setLoginError(result.message);
-        // You can update the state or display an error message to the user
       }
     } catch (error) {
       console.error('Error during login:', error.message);
       setLoginError("Unexpected error during login");
-      // Handle unexpected errors during login
-      // You can update the state or display an error message to the user
     }
   };
 

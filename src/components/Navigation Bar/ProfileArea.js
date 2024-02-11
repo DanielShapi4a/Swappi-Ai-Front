@@ -1,43 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, StyledButton } from '../../assets/styles.js';
 import defaultProfileImage from '../../assets/images/default-profile-image.png';
-import { getUser } from '../../services/userData.js';
 import LoginModal from '../Login Pop-UP/LoginModal.js';
+import { getUserById } from '../../services/userData.js'; // Import getUserById function
 
-const ProfileArea = ({ setUserData }) => {
-  const [userData, setUserDataLocal] = useState(null);
+const ProfileArea = ({ userData }) => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   useEffect(() => {
-    // Fetch user details when the component mounts
-    fetchUserData();
+    // Fetch user data only once when the component mounts
+    // No need to fetch user data again as it is received as props
   }, []);
 
-  const fetchUserData = async () => {
-    const userResult = await getUser();
-
-    if (userResult.success) {
-      // Update user details in the state or Redux store
-      setUserDataLocal(userResult.user);
-      setUserData(userResult.user);
-    } else {
-      // Handle error fetching user details
-      console.error('Error fetching user details:', userResult.message);
-    }
+  const handleLoginSuccess = (userData, accessToken, refreshToken) => {
+    // Handle login success if needed
+    setLoginModalOpen(false); // Close the login modal
   };
 
   const handleLogout = () => {
-    // Clear user data when logging out
-    setUserDataLocal(null);
-    setUserData(null); // Assuming setUserData is a function to update the user data in your state or Redux store
+    // Handle logout if needed
   };
 
   const openLoginModal = () => {
-    setLoginModalOpen(true);
-  };
-
-  const closeLoginModal = () => {
-    setLoginModalOpen(false);
+    setLoginModalOpen(true); // Open the login modal
   };
 
   return (
@@ -53,7 +38,7 @@ const ProfileArea = ({ setUserData }) => {
           <>
             <span>Welcome</span>
             <StyledButton onClick={openLoginModal}>Login Here</StyledButton>
-            {isLoginModalOpen && <LoginModal onClose={closeLoginModal} setUserData={setUserData} />}
+            {isLoginModalOpen && <LoginModal onClose={handleLoginSuccess} />}
           </>
         )}
       </>

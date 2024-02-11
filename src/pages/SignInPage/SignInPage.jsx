@@ -4,7 +4,7 @@ import { StyledButton } from '../../assets/styles.js';
 import { registerUser } from '../../services/userData.js';
 import './SignInPage.css';
 
-const SignInPage = ({ history }) => {
+const SignInPage = ({ history, setUserData }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -31,6 +31,7 @@ const SignInPage = ({ history }) => {
 
       // Check if sign-in was successful
       if (result.success) {
+        console.log("Result Success after the function:", result.success);
         // Redirect to the main page after successful sign-in
         history.push('/');
       } else {
