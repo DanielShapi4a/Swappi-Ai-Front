@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Avatar, StyledButton } from '../../assets/styles.js';
-import defaultProfileImage from '../../assets/images/default-profile-image.png';
-import LoginModal from '../Login Pop-UP/LoginModal.js';
-import { getUserById } from '../../services/userData.js'; // Import getUserById function
+import React, { useState } from "react";
+import { Avatar, StyledButton } from "../../assets/styles.js";
+import defaultProfileImage from "../../assets/images/default-profile-image.png";
+import LoginModal from "../Login Pop-UP/LoginModal.js";
 
-const ProfileArea = ({ userData }) => {
+const ProfileArea = () => {
+  const [userData, setUserData] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
-  useEffect(() => {
-    // Fetch user data only once when the component mounts
-    // No need to fetch user data again as it is received as props
-  }, []);
-
-  const handleLoginSuccess = (userData, accessToken, refreshToken) => {
-    // Handle login success if needed
+  const handleLoginSuccess = (userData) => {
+    setUserData(userData); // Set user data received from login modal
     setLoginModalOpen(false); // Close the login modal
   };
 
   const handleLogout = () => {
     // Handle logout if needed
+    setUserData(null); // Clear user data on logout
   };
 
   const openLoginModal = () => {
@@ -26,8 +22,13 @@ const ProfileArea = ({ userData }) => {
   };
 
   return (
-    <div className="profile-area" style={{ display: 'flex', alignItems: 'center' }}>
-      <Avatar src={userData ? userData.avatar || defaultProfileImage : defaultProfileImage} alt="User Avatar" size="48px" marginRight="10px" />
+    <div className="profile-area" style={{ display: "flex", alignItems: "center" }}>
+      <Avatar
+        src={userData ? userData.avatar || defaultProfileImage : defaultProfileImage}
+        alt="User Avatar"
+        size="48px"
+        marginRight="10px"
+      />
       <>
         {userData ? (
           <>
@@ -42,7 +43,6 @@ const ProfileArea = ({ userData }) => {
           </>
         )}
       </>
-      {/* You can add any other profile-related content here */}
     </div>
   );
 };
