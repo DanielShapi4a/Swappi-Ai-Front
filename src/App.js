@@ -1,11 +1,12 @@
 // App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import MainPage from './pages/MainPage/MainPage.jsx';
-import SignInPage from './pages/SignInPage/SignInPage.jsx';
-import TicketDetails from './components/TicketDetails/TicketDetails.jsx';
-import { AuthProvider } from './pages/contexts/authContext.js';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
+import MainPage from "./pages/MainPage/MainPage.jsx";
+import SignInPage from "./pages/SignInPage/SignInPage.jsx";
+import TicketDetails from "./components/TicketDetails/TicketDetails.jsx";
+import { AuthProvider } from "./pages/contexts/authContext.js";
+
 
 function App() {
   return (
