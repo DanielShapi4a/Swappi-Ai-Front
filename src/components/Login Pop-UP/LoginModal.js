@@ -35,7 +35,6 @@ const LoginModal = ({ onClose }) => {
 
       if (result.success) {
         const userData = result.user; // Decode JWT token to get user data
-        console.log("JWT DATA:", userData);
 
         // Store the token in localStorage
         localStorage.setItem("accessToken", result.token);

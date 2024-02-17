@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, StyledButton } from "../../assets/styles.js";
 import defaultProfileImage from "../../assets/images/default-profile-image.png";
 import LoginModal from "../Login Pop-UP/LoginModal.js";
+import { useAuth } from "../../pages/contexts/authContext.js";
 
 const ProfileArea = () => {
-  const [userData, setUserData] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
+  const { user, setUser } = useAuth();
+
   const handleLoginSuccess = (userData) => {
-    setUserData(userData); // Set user data received from login modal
+    setUser(userData);
     setLoginModalOpen(false); // Close the login modal
   };
 
   const handleLogout = () => {
     // Handle logout if needed
-    setUserData(null); // Clear user data on logout
+    setUser(null);
   };
 
   const openLoginModal = () => {
@@ -24,15 +26,15 @@ const ProfileArea = () => {
   return (
     <div className="profile-area" style={{ display: "flex", alignItems: "center" }}>
       <Avatar
-        src={userData ? userData.avatar || defaultProfileImage : defaultProfileImage}
+        src={user ? user.avatar || defaultProfileImage : defaultProfileImage}
         alt="User Avatar"
         size="48px"
         marginRight="10px"
       />
       <>
-        {userData ? (
+        {user ? (
           <>
-            <span>Welcome, {userData.name}</span>
+            <span>Welcome, {user.name}</span>
             <StyledButton onClick={handleLogout}>Logout</StyledButton>
           </>
         ) : (
