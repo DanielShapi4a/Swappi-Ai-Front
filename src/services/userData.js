@@ -1,16 +1,35 @@
 // userData.js
 
 import { API_URL } from "./constants";
+import { jwtDecode } from "jwt-decode";
 
+// userData.js
 export async function registerUser(userData) {
-  return await fetch(`${API_URL}/auth/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(userData),
-  }).json();
+  console.log("======START OF REGISTER USER FUNCTION======")
+  console.log(JSON.stringify(userData));
+  try {
+    const response = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(userData),
+    });
+
+    const result = await response.json();
+    console.log("Signe-IN response:", result);
+    if (response.ok) {
+      console.log("Response.ok=TRUE:",response.ok);
+      return { success: true };
+    } else {
+      console.log("Response.ok=FALSE:",response.ok);
+      return { success: false, message: result.message || 'Sign-in failed' };
+    }
+  } catch (error) {
+    console.error('Error during sign-in:', error.message);
+    return { success: false, message: 'Unexpected error during sign-in' };
+  }
 }
 
 export async function loginUser(email, password) {
@@ -49,6 +68,7 @@ export async function loginUser(email, password) {
     };
   }
 }
+
 
 export async function getUser() {
   try {
@@ -97,5 +117,15 @@ export async function editUserProfile(id, data) {
 }
 
 export async function getUserById(id) {
-  return await fetch(`${API_URL}/user/getUserById/${id}`, { credentials: "include" }).then((response) => response.json());
+  try {
+    const response = await fetch(`${API_URL}/user/getUserById/${id}`, { credentials: "include" });
+    if (!response.ok) {
+      throw new Error('Failed to fetch user');
+    }
+    const data = await response.json();
+    return data.user;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch user');
+  }
 }

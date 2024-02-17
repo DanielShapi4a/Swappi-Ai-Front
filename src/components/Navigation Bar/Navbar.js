@@ -3,7 +3,7 @@ import HamburgerMenu from './HamburgerMenu';
 import ProfileArea from './ProfileArea';
 import '../../CSS/Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ userData }) => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ const Navbar = () => {
         />
       </div>
       <div className="right-section">
-        <ProfileArea />
+        <ProfileArea userData={userData} />
       </div>
     </div>
   );

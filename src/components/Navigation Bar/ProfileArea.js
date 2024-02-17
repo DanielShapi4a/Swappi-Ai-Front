@@ -1,48 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { Avatar, StyledButton } from '../../assets/styles.js';
-import defaultProfileImage from '../../assets/images/default-profile-image.png';
-import { getUser } from '../../services/userData.js';
-import LoginModal from '../Login Pop-UP/LoginModal.js';
+import React, { useState } from "react";
+import { Avatar, StyledButton } from "../../assets/styles.js";
+import defaultProfileImage from "../../assets/images/default-profile-image.png";
+import LoginModal from "../Login Pop-UP/LoginModal.js";
 
-const ProfileArea = ({ setUserData }) => {
-  const [userData, setUserDataLocal] = useState(null);
+const ProfileArea = () => {
+  const [userData, setUserData] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
-  useEffect(() => {
-    // Fetch user details when the component mounts
-    fetchUserData();
-  }, []);
-
-  const fetchUserData = async () => {
-    const userResult = await getUser();
-
-    if (userResult.success) {
-      // Update user details in the state or Redux store
-      setUserDataLocal(userResult.user);
-      setUserData(userResult.user);
-    } else {
-      // Handle error fetching user details
-      console.error('Error fetching user details:', userResult.message);
-    }
+  const handleLoginSuccess = (userData) => {
+    setUserData(userData); // Set user data received from login modal
+    setLoginModalOpen(false); // Close the login modal
   };
 
   const handleLogout = () => {
-    // Clear user data when logging out
-    setUserDataLocal(null);
-    setUserData(null); // Assuming setUserData is a function to update the user data in your state or Redux store
+    // Handle logout if needed
+    setUserData(null); // Clear user data on logout
   };
 
   const openLoginModal = () => {
-    setLoginModalOpen(true);
-  };
-
-  const closeLoginModal = () => {
-    setLoginModalOpen(false);
+    setLoginModalOpen(true); // Open the login modal
   };
 
   return (
-    <div className="profile-area" style={{ display: 'flex', alignItems: 'center' }}>
-      <Avatar src={userData ? userData.avatar || defaultProfileImage : defaultProfileImage} alt="User Avatar" size="48px" marginRight="10px" />
+    <div className="profile-area" style={{ display: "flex", alignItems: "center" }}>
+      <Avatar
+        src={userData ? userData.avatar || defaultProfileImage : defaultProfileImage}
+        alt="User Avatar"
+        size="48px"
+        marginRight="10px"
+      />
       <>
         {userData ? (
           <>
@@ -53,11 +39,10 @@ const ProfileArea = ({ setUserData }) => {
           <>
             <span>Welcome</span>
             <StyledButton onClick={openLoginModal}>Login Here</StyledButton>
-            {isLoginModalOpen && <LoginModal onClose={closeLoginModal} setUserData={setUserData} />}
+            {isLoginModalOpen && <LoginModal onClose={handleLoginSuccess} />}
           </>
         )}
       </>
-      {/* You can add any other profile-related content here */}
     </div>
   );
 };

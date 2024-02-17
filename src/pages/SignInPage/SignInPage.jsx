@@ -1,25 +1,46 @@
-// SignInPage.js
+// SignInPage.jsx
 import React, { useState } from 'react';
 import { StyledButton } from '../../assets/styles.js';
 import { registerUser } from '../../services/userData.js';
 import './SignInPage.css';
 
-const SignInPage = ({ history }) => {
+const SignInPage = ({ history, setUserData }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [signInError, setSignInError] = useState('');
 
   const handleSignIn = async () => {
-    // Implement your sign-in logic using the registerUser function from userData.js
-    const result = await registerUser({ email, username, password });
+    // Check if password and confirm password match
+    if (password !== confirmPassword) {
+      setSignInError('Passwords do not match');
+      return;
+    }
 
-    // Check if sign-in was successful
-    if (result.success) {
-      // Redirect to the main page after successful sign-in
-      history.push('/');
-    } else {
-      // Handle sign-in error
-      console.error('Sign-in failed:', result.message);
+    try {
+      const userData = {
+        email: email,
+        name: username,
+        password: password,
+        phoneNumber: phoneNumber, // Include the phoneNumber field
+      };
+
+      const result = await registerUser(userData);
+
+      // Check if sign-in was successful
+      if (result.success) {
+        console.log("Result Success after the function:", result.success);
+        // Redirect to the main page after successful sign-in
+        history.push('/');
+      } else {
+        // Handle sign-in error
+        setSignInError(result.message || 'Sign-in failed');
+      }
+    } catch (error) {
+      console.error('Error during sign-in:', error.message);
+      setSignInError('Unexpected error during sign-in');
     }
   };
 
@@ -34,6 +55,11 @@ const SignInPage = ({ history }) => {
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
           <label>Password:</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label>Confirm Password:</label>
+          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          <label>Phone Number:</label>
+          <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+          {signInError && <span className="error-message">{signInError}</span>}
           <StyledButton onClick={handleSignIn}>Sign-In</StyledButton>
         </div>
       </div>
