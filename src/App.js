@@ -7,7 +7,6 @@ import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import TicketDetails from "./components/TicketDetails/TicketDetails.jsx";
 import { AuthProvider } from "./pages/contexts/authContext.js";
 
-
 function App() {
   return (
     <div className="App">

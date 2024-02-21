@@ -3,7 +3,7 @@ import { StyledButton } from "../../assets/styles.js";
 import "./LoginModal.css"; // Import the CSS file for modal styles
 import { Link } from "react-router-dom";
 import { loginUser } from "../../services/userData.js"; // Import loginUser function
-import { jwt_decode } from "jwt-decode";
+import { useCookies } from 'react-cookie'; // Import useCookies hook
 
 const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState("");
@@ -11,6 +11,7 @@ const LoginModal = ({ onClose }) => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState(null);
+  const [cookies, setCookie] = useCookies(['accessToken']); // Using useCookies hook to get/set cookies
 
   const handleLogin = async () => {
     // Validate email format
@@ -28,17 +29,13 @@ const LoginModal = ({ onClose }) => {
     } else {
       setPasswordError("");
     }
-
     try {
-      // Call the loginUser function from userData.js
       const result = await loginUser(email, password);
-
       if (result.success) {
         const userData = result.user; // Decode JWT token to get user data
-
-        // Store the token in localStorage
-        localStorage.setItem("accessToken", result.token);
-
+        // Store the token in cookies
+        setCookie('accessToken', result.accessToken, { path: '/' }); // Typo in 'accessToken'
+        setCookie('userData', result.user, { path: '/' });
         onClose(userData); // Pass decoded user data to the callback function
       } else {
         // Handle login failure

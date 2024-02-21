@@ -19,12 +19,9 @@ export async function registerUser(userData) {
 
     const result = await response.json();
     console.log("Signe-IN response:", result);
-    if (response.ok) {
-      console.log("Response.ok=TRUE:",response.ok);
-      return { success: true };
-    } else {
-      console.log("Response.ok=FALSE:",response.ok);
-      return { success: false, message: result.message || 'Sign-in failed' };
+    if (response.ok)
+    {
+      return result;
     }
   } catch (error) {
     console.error('Error during sign-in:', error.message);
@@ -44,12 +41,12 @@ export async function loginUser(email, password) {
     });
 
     const result = await response.json();
-
     if (response.ok) {
       // Successful login
       return {
         success: true,
-        token: result.token,
+        accessToken: result.accessToken,
+        refreshToken: result.refreshToken,
         user: result.user,
       };
     } else {
