@@ -3,7 +3,7 @@ import { StyledButton } from "../../assets/styles.js";
 import "./LoginModal.css"; // Import the CSS file for modal styles
 import { Link } from "react-router-dom";
 import { loginUser } from "../../services/userData.js"; // Import loginUser function
-import { useCookies } from 'react-cookie'; // Import useCookies hook
+import { useAuth } from "../../pages/contexts/authContext.js";
 
 const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState("");
@@ -11,8 +11,9 @@ const LoginModal = ({ onClose }) => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState(null);
-  const [cookies, setCookie] = useCookies(['accessToken']); // Using useCookies hook to get/set cookies
-
+  const {setUser} = useAuth();
+  console.log("@@@@@@@@@@");
+  console.log(setUser);
   const handleLogin = async () => {
     // Validate email format
     if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -30,13 +31,11 @@ const LoginModal = ({ onClose }) => {
       setPasswordError("");
     }
     try {
-      const result = await loginUser(email, password);
+      const result = await loginUser(email, password, setUser); 
+      console.log(result);
       if (result.success) {
-        const userData = result.user; // Decode JWT token to get user data
-        // Store the token in cookies
-        setCookie('accessToken', result.accessToken, { path: '/' }); // Typo in 'accessToken'
-        setCookie('userData', result.user, { path: '/' });
-        onClose(userData); // Pass decoded user data to the callback function
+        const userData = result.user; 
+        onClose(userData); 
       } else {
         // Handle login failure
         console.error("Login failed:", result.message);

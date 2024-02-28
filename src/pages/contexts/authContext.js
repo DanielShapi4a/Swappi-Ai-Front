@@ -1,32 +1,47 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { setUser, isAuthenticated } from '../../services/authService'; // Adjust the path accordingly
+import axios from 'axios';
+import { API_URL } from '../../services/constants';
+import { getCookie, isAuthenticated } from '../../services/authService'; 
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUserState] = useState(null);
+  const [user, setUser] = useState(null); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (isAuthenticated()) {
-        
-        setUser(setUserState); // Fetch user data and set it in the state
+      console.log("Fetching user data...");
+      try {
+        const token = getCookie('accessToken');
+        if (token) {
+          const response = await axios.post(`${API_URL}/auth/validate-token`, { token }); 
+          const userData = response.data;
+          setUser(userData); // Use setUser directly
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchUserData(); // Fetch user data when the component mounts
+    if (isAuthenticated()) {
+      fetchUserData();
+    } else {
+      setLoading(false);
+    }
 
-    // Clean-up function to prevent memory leaks
     return () => {
-      setUserState(null); // Reset user state on unmount
+      setUser(null);
     };
-  }, []); // Empty dependency array ensures the effect runs only once on mount
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser: setUserState }}>
-      {children}
+    <AuthContext.Provider value={{ user, setUser }}> {/* Use destructured setUser */}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

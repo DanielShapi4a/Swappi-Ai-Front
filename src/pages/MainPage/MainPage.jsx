@@ -7,7 +7,7 @@ import CategoryGrid from "../../components/Categories/CategoryGrid";
 import Footer from "../../components/Footer";
 import debounce from "debounce";
 import HotOffer from "../../components/Hot Offers/HotOffers";
-import { useAuth } from "../../pages/contexts/authContext.js"; // Import useAuth hook
+import { useAuth } from "../../pages/contexts/authContext.js"; 
 
 function MainPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -15,7 +15,7 @@ function MainPage() {
   const [hasMore, setHasMore] = useState(true);
   const [loadingData, setLoadingData] = useState(false);
   const [products, setProducts] = useState([]);
-  const { user } = useAuth(); // Access user data from AuthContext
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = debounce(() => {
@@ -23,13 +23,16 @@ function MainPage() {
         setCurrentPage((prevPage) => prevPage + 1);
       }
     }, 200);
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [selectedCategory, currentPage, hasMore, loadingData, products]);
+
+
+ 
+
 
   return (
     <div className="App">

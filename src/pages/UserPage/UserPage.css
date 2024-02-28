@@ -1,0 +1,27 @@
+* UserPage.css */
+.user-page {
+  display: flex;
+  flex-direction: column; 
+  height: 100vh; 
+}
+
+.dashboard-container {
+  display: flex;
+  flex: 1; /* Grow to take remaining space */
+}
+
+.dashboard-nav {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); 
+}
+
+.dashboard-content {
+  flex: 1; /* Grow to take remaining space */
+  padding: 20px;
+  background-color: white; /* Example background color */
+}
+
+.dashboard-content{
+    display: flex;
+    flex-direction: row; 
+    height: 100vh; /* Use full viewport height */
+}

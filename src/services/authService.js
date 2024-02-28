@@ -27,26 +27,32 @@ export const checkLoggedIn = () => {
   return false;
 };
 
+// Function to set user data in context state
+export const setUser = (userData) => {
+  setUserCallback(userData);
+};
+
 // Function to fetch user data from backend and set in context state
-export const setUser = async (setUserCallback) => {
-  console.log("HIIIII");
+export const fetchUserData = async (setUserCallback) => {
+  console.log("Fetching user data...");
   try {
     const token = getCookie('accessToken');
+    console.log("token", token);
     if (token) {
-      console.log("byeyeeyyeye");
-
-      const response = await axios.post(`${API_URL}/auth/validate-token`,{token: token});
-      const userData = response.data; // Assuming user data is returned from the backend
-      console.log("UserData after setUser:", userData);
-      setUserCallback(userData); // Set user data using the provided callback
+      const response = await axios.post(`${API_URL}/auth/validate-token`, { token }); 
+      const userData = response.data;
+      console.log("UserData after fetchUserData:", userData);
+      setUser(userData, setUserCallback); // Call setUser with user data and setUserCallback
     }
   } catch (error) {
     console.error('Error fetching user data:', error.message);
   }
 };
 
+
 export const isAuthenticated = () => {
   const token = getCookie('accessToken');
+  console.log("The token that we got:", token);
   if (!token) {
     return false; // No token found
   }
@@ -70,7 +76,7 @@ export const isAuthenticated = () => {
 };
 
 // Function to get cookie value by name
-const getCookie = (name) => {
+export const getCookie = (name) => {
   const cookieString = document.cookie;
   const cookies = cookieString.split('; ');
   for (const cookie of cookies) {
