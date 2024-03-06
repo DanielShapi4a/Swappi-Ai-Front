@@ -2,6 +2,7 @@
 
 import { API_URL } from "./constants";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 // userData.js
 export async function registerUser(userData) {
@@ -45,8 +46,8 @@ export async function loginUser(email, password) {
       // Successful login
       return {
         success: true,
-        accessToken: result.accessToken,
-        refreshToken: result.refreshToken,
+        // accessToken: result.accessToken,
+        // refreshToken: result.refreshToken,
         user: result.user,
       };
     } else {
@@ -69,7 +70,7 @@ export async function loginUser(email, password) {
 
 export async function getUser() {
   try {
-    const response = await fetch(`${API_URL}/auth/getUser`, { credentials: "include" });
+    const response = await fetch(`${API_URL}/auth/getuserdatabytoken`, { credentials: "include" });
 
     if (!response.ok) {
       throw new Error('Error fetching user details');
@@ -125,4 +126,7 @@ export async function getUserById(id) {
     console.error(error);
     throw new Error('Failed to fetch user');
   }
+}
+export async function logoutUser () {
+  const response = await axios.get(`${API_URL}/auth/logout`, {withCredentials : true});
 }
