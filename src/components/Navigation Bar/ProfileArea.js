@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, StyledButton } from "../../assets/styles.js";
 import defaultProfileImage from "../../assets/images/default-profile-image.png";
-import LoginModal from "../Login Pop-UP/LoginModal.js";
+import LoginModal from "../Login Pop-UP/LoginModal.jsx";
 import { useAuth } from "../../pages/contexts/authContext.js";
 import { logoutUser } from "../../services/userData.js";
 
