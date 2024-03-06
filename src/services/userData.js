@@ -1,7 +1,8 @@
-// userData.js
-
 import { API_URL } from "./constants";
 import { jwtDecode } from "jwt-decode";
+import { setUser } from "./authService";
+import { useAuth } from '../pages/contexts/authContext.js';
+import axios from "axios";
 
 // userData.js
 export async function registerUser(userData) {
@@ -19,12 +20,9 @@ export async function registerUser(userData) {
 
     const result = await response.json();
     console.log("Signe-IN response:", result);
-    if (response.ok) {
-      console.log("Response.ok=TRUE:",response.ok);
-      return { success: true };
-    } else {
-      console.log("Response.ok=FALSE:",response.ok);
-      return { success: false, message: result.message || 'Sign-in failed' };
+    if (response.ok)
+    {
+      return result;
     }
   } catch (error) {
     console.error('Error during sign-in:', error.message);
@@ -32,47 +30,32 @@ export async function registerUser(userData) {
   }
 }
 
-export async function loginUser(email, password) {
+export const loginUser = async (email, password, setUser) => {
   try {
-    const response = await fetch(`${API_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await axios.post(`${API_URL}/auth/login`, { email, password });
+    const result = response.data; // Access the data object from the response
 
-    const result = await response.json();
+    console.log("The information received from login is:");
+    console.log(result);
 
-    if (response.ok) {
-      // Successful login
-      return {
-        success: true,
-        token: result.token,
-        user: result.user,
-      };
+    if (response.status === 200) {
+      // Update user data in the context
+      setUser(result.user);
+      return { success: true, user: result.user };
     } else {
-      // Failed login
-      return {
-        success: false,
-        message: result.message || 'Login failed',
-      };
+      return { success: false, message: result.message || 'Login failed' };
     }
   } catch (error) {
-    // Error during fetch
     console.error('Error during login:', error.message);
-    return {
-      success: false,
-      message: 'Error during login',
-    };
+    return { success: false, message: 'Error during login' };
   }
-}
+};
+
 
 
 export async function getUser() {
   try {
-    const response = await fetch(`${API_URL}/auth/getUser`, { credentials: "include" });
+    const response = await fetch(`${API_URL}/auth/getuserdatabytoken`, { credentials: "include" });
 
     if (!response.ok) {
       throw new Error('Error fetching user details');
@@ -128,4 +111,7 @@ export async function getUserById(id) {
     console.error(error);
     throw new Error('Failed to fetch user');
   }
+}
+export async function logoutUser () {
+  const response = await axios.get(`${API_URL}/auth/logout`, {withCredentials : true});
 }

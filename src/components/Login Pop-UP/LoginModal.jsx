@@ -3,7 +3,10 @@ import { StyledButton } from "../../assets/styles.js";
 import "./LoginModal.css"; // Import the CSS file for modal styles
 import { Link } from "react-router-dom";
 import { loginUser } from "../../services/userData.js"; // Import loginUser function
-import { jwt_decode } from "jwt-decode";
+<<<<<<< HEAD:src/components/Login Pop-UP/LoginModal.js
+=======
+import { useAuth } from "../../pages/contexts/authContext.js";
+>>>>>>> e3dffd06cd5055e1668673bf9ae1a9e13bdab31d:src/components/Login Pop-UP/LoginModal.jsx
 
 const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState("");
@@ -11,38 +14,41 @@ const LoginModal = ({ onClose }) => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState(null);
+<<<<<<< HEAD:src/components/Login Pop-UP/LoginModal.js
 
+=======
+  const {setUser} = useAuth();
+  console.log("@@@@@@@@@@");
+  console.log(setUser);
+>>>>>>> e3dffd06cd5055e1668673bf9ae1a9e13bdab31d:src/components/Login Pop-UP/LoginModal.jsx
   const handleLogin = async () => {
+    setEmailError("");
+    setPasswordError("");
+    setLoginError(null);
+
     // Validate email format
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       setEmailError("Invalid email format");
       return;
-    } else {
-      setEmailError("");
     }
 
-    // Validate password format (add your own password validation logic if needed)
+    // Validate password length
     if (password.length < 6) {
       setPasswordError("Password must be at least 6 characters");
       return;
-    } else {
-      setPasswordError("");
     }
 
     try {
-      // Call the loginUser function from userData.js
-      const result = await loginUser(email, password);
-
+      const result = await loginUser(email, password, setUser); 
+      console.log(result);
       if (result.success) {
-        const userData = result.user; // Decode JWT token to get user data
-
-        // Store the token in localStorage
-        localStorage.setItem("accessToken", result.token);
-
-        onClose(userData); // Pass decoded user data to the callback function
+<<<<<<< HEAD:src/components/Login Pop-UP/LoginModal.js
+        onClose(result.user); // Pass user data to the callback function
+=======
+        const userData = result.user; 
+        onClose(userData); 
+>>>>>>> e3dffd06cd5055e1668673bf9ae1a9e13bdab31d:src/components/Login Pop-UP/LoginModal.jsx
       } else {
-        // Handle login failure
-        console.error("Login failed:", result.message);
         setLoginError(result.message);
       }
     } catch (error) {
@@ -51,19 +57,9 @@ const LoginModal = ({ onClose }) => {
     }
   };
 
-  // Close the modal when clicking outside of it
-  const handleModalClick = (e) => {
-    e.stopPropagation(); // Prevent the event from reaching the parent div
-  };
-
-  // Close the modal when clicking outside of it
-  const handleBackgroundClick = () => {
-    onClose();
-  };
-
   return (
-    <div className="login-modal" onClick={handleBackgroundClick}>
-      <div className="modal-content" onClick={handleModalClick}>
+    <div className="login-modal" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Login</h2>
         <label>Email:</label>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -74,7 +70,7 @@ const LoginModal = ({ onClose }) => {
         <StyledButton onClick={handleLogin}>Login</StyledButton>
         {loginError && <div className="error-message">{loginError}</div>}
         <Link to="/sign-in" style={{ marginTop: "10px", display: "block", textAlign: "center", color: "black" }}>
-          Sign-In here!{" "}
+          Sign-In here!
         </Link>
       </div>
     </div>

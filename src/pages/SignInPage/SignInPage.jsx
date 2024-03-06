@@ -1,10 +1,12 @@
-// SignInPage.jsx
 import React, { useState } from 'react';
 import { StyledButton } from '../../assets/styles.js';
 import { registerUser } from '../../services/userData.js';
+import { useNavigate } from "react-router-dom";
 import './SignInPage.css';
 
-const SignInPage = ({ history, setUserData }) => {
+const SignInPage = ({ setUserData }) => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,23 +26,20 @@ const SignInPage = ({ history, setUserData }) => {
         email: email,
         name: username,
         password: password,
-        phoneNumber: phoneNumber, // Include the phoneNumber field
+        phoneNumber: phoneNumber,
       };
 
       const result = await registerUser(userData);
-
+      console.log("BACK-END RESULTS", result);
       // Check if sign-in was successful
-      if (result.success) {
-        console.log("Result Success after the function:", result.success);
-        // Redirect to the main page after successful sign-in
-        history.push('/');
+      if (result.user !== undefined) {
+        navigate("/");
       } else {
         // Handle sign-in error
         setSignInError(result.message || 'Sign-in failed');
       }
     } catch (error) {
-      console.error('Error during sign-in:', error.message);
-      setSignInError('Unexpected error during sign-in');
+      setSignInError('Unexpected error during sign-in. Please try again');
     }
   };
 
