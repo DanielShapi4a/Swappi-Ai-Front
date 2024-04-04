@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './ProfilePage.css'; // Import CSS file for ProfilePage styling
+import './ProfilePage.css'; 
+import { editUserProfile } from '../../services/userData';
 
-// EditableField component for input fields
 const EditableField = ({ label, value, name, type, onChange }) => (
   <div className="edit-input">
     <label>{label}:</label>
@@ -9,7 +9,6 @@ const EditableField = ({ label, value, name, type, onChange }) => (
   </div>
 );
 
-// EditButtons component for save and cancel buttons
 const EditButtons = ({ onSave, onCancel }) => (
   <div className="edit-buttons">
     <button onClick={onSave}>Save</button>
@@ -17,7 +16,6 @@ const EditButtons = ({ onSave, onCancel }) => (
   </div>
 );
 
-// EditForm component for the entire edit form
 const EditForm = ({ user, onSave, onCancel, onChange }) => (
   <div className="edit-form">
     <EditableField label="Gender" value={user.gender} name="gender" type="select" onChange={onChange} />
@@ -40,9 +38,13 @@ const ProfilePage = ({ user }) => {
     }));
   };
 
-  const handleSave = () => {
-    // Handle save action, e.g., update user data in the database
-    console.log("Edited user data:", editedUser);
+  const handleSave = async () => {
+    try {
+      const response = await editUserProfile(editedUser._id, editedUser);
+      console.log("User profile updated successfully:", response);
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+    }
     setIsEditing(false);
   };
 

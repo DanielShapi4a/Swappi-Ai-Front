@@ -33,20 +33,18 @@ const ProfileArea = () => {
         size="48px"
         marginRight="10px"
       />
-      <>
-        {user ? (
-          <>
-            <span>Welcome, {user.name}</span>
-            <StyledButton onClick={handleLogout}>Logout</StyledButton>
-          </>
-        ) : (
-          <>
-            <span>Welcome</span>
-            <StyledButton onClick={openLoginModal}>Login Here</StyledButton>
-            {isLoginModalOpen && <LoginModal onClose={handleLoginSuccess} />}
-          </>
-        )}
-      </>
+      {user ? (
+        <>
+          <span>Welcome, {user.name}</span>
+          <StyledButton onClick={handleLogout}>Logout</StyledButton>
+        </>
+      ) : (
+        <>
+          <span>Welcome</span>
+          <StyledButton onClick={openLoginModal}>Login Here</StyledButton>
+          {isLoginModalOpen && <LoginModal onClose={handleLoginSuccess} />}
+        </>
+      )}
     </div>
   );
 };

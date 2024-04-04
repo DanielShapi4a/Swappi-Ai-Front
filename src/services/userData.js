@@ -88,16 +88,17 @@ export async function getUserWishlist() {
   return fetch(`${API_URL}/products/wishlist/getWishlist`, { credentials: "include" }).then((response) => response.json());
 }
 
-export async function editUserProfile(id, data) {
-  return await fetch(`${API_URL}/user/edit-profile/${id}`, {
-    method: "PATCH",
+export async function editUserProfile(userId, data) {
+  return await fetch(`${API_URL}/users/edit/${userId}`, {
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     credentials: "include",
     body: JSON.stringify(data),
-  }).json();
+  }).then(response => response.json());
 }
+
 
 export async function getUserById(id) {
   try {
