@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Avatar, StyledButton } from "../../assets/styles.js";
 import defaultProfileImage from "../../assets/images/default-profile-image.png";
 import LoginModal from "../Login Pop-UP/LoginModal.jsx";

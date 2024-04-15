@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { StyledButton } from '../../assets/styles.js';
-import { registerUser } from '../../services/userData.js';
+import React, { useState } from "react";
+import { StyledButton } from "../../assets/styles.js";
+import { registerUser } from "../../services/userData.js";
 import { useNavigate } from "react-router-dom";
-import './SignInPage.css';
+import "./SignInPage.css";
 
 const SignInPage = ({ setUserData }) => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [signInError, setSignInError] = useState('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [signInError, setSignInError] = useState("");
 
   const handleSignIn = async () => {
     // Check if password and confirm password match
     if (password !== confirmPassword) {
-      setSignInError('Passwords do not match');
+      setSignInError("Passwords do not match");
       return;
     }
 
@@ -36,10 +36,10 @@ const SignInPage = ({ setUserData }) => {
         navigate("/");
       } else {
         // Handle sign-in error
-        setSignInError(result.message || 'Sign-in failed');
+        setSignInError(result.message || "Sign-in failed");
       }
     } catch (error) {
-      setSignInError('Unexpected error during sign-in. Please try again');
+      setSignInError("Unexpected error during sign-in. Please try again");
     }
   };
 

@@ -1,8 +1,7 @@
-* UserPage.css */
-.user-page {
+* UserPage.css */ .user-page {
   display: flex;
-  flex-direction: column; 
-  height: 100vh; 
+  flex-direction: column;
+  height: 100vh;
 }
 
 .dashboard-container {
@@ -11,7 +10,7 @@
 }
 
 .dashboard-nav {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .dashboard-content {
@@ -20,8 +19,8 @@
   background-color: white; /* Example background color */
 }
 
-.dashboard-content{
-    display: flex;
-    flex-direction: row; 
-    height: 100vh; /* Use full viewport height */
+.dashboard-content {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Use full viewport height */
 }
