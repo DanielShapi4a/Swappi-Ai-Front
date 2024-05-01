@@ -18,6 +18,7 @@ const EditButtons = ({ onSave, onCancel }) => (
 
 const EditForm = ({ user, onSave, onCancel, onChange }) => (
   <div className="edit-form">
+    <EditableField label="Name" value={user.name} name="name" type="text" onChange={onChange} />
     <EditableField label="Gender" value={user.gender} name="gender" type="select" onChange={onChange} />
     <EditableField label="Phone Number" value={user.phoneNumber} name="phoneNumber" type="text" onChange={onChange} />
     <EditableField label="Email" value={user.email} name="email" type="email" onChange={onChange} />
@@ -73,6 +74,9 @@ const ProfilePage = ({ user }) => {
           <EditForm user={editedUser} onSave={handleSave} onCancel={handleCancel} onChange={handleChange} />
         ) : (
           <div className="data-item">
+            <p>
+              <strong>Name:</strong> {editedUser.name}
+            </p>
             <p>
               <strong>Gender:</strong> {editedUser.gender}
             </p>

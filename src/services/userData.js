@@ -8,7 +8,7 @@ export async function registerUser(userData) {
   console.log("======START OF REGISTER USER FUNCTION======");
   console.log(JSON.stringify(userData));
   try {
-    const response = await fetch(`${API_URL}/auth/register`, {
+    const response = await fetch(`${API_URL}/auth/updateUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -105,8 +105,8 @@ export async function getUserWishlist() {
 }
 
 export async function editUserProfile(id, data) {
-  return await fetch(`${API_URL}/user/edit-profile/${id}`, {
-    method: "PATCH",
+  return await fetch(`${API_URL}/users/updateUser/${id}`, {
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
