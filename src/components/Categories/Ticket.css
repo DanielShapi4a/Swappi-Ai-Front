@@ -34,6 +34,8 @@
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 0.5rem;
+    text-decoration: none;
 }
   
 @media (min-width: 768px) {

@@ -1,17 +1,49 @@
+.ticket-page {
+  background-size: cover; /* Ensures the background image covers the entire container */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+  height: 100vh; /* Sets the height of the container to 100% of the viewport height */
+  display: flex; /* Enables Flexbox layout */
+  flex-direction: column; /* Aligns children in a column */
+  justify-content: space-between; /* Vertically distributes the space between children */
+}
 
+.sport{
+    background-image: url('C:\Git\Swappi-Ai-Front\src\assets\backGroundImages\backGround sport picture.jpg');
+}
+.vacation{
+  background-image: url('C:\Git\Swappi-Ai-Front\src\assets\backGroundImages\backGround vacation picture.jpg');
+}
+.concert{
+  background-image: url('C:\Git\Swappi-Ai-Front\src\assets\backGroundImages\backGround concert picture.jpg');
+}
+.other{
+  background-image: url('C:\Git\Swappi-Ai-Front\src\assets\backGroundImages\backGround other picture.jpg');
+}
+
+/* Additional styles for children components */
+.ticket-page > * {
+  flex: 1; /* Makes children components fill the available space */
+}
 
 /* Container styling */
 .ticket-details-container {
-  max-width: 800px;
+  max-width: 500px;
+  max-height: auto;
   margin: 20px auto;
   padding: 20px;
-  background-color: #135291;
+  background-color: #ffffff;
+  opacity: 0.93;
   border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  flex: auto;
+  justify-content: center;
+  overflow: hidden;
 }
 
 /* Title styling */
 .ticket-details-title {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -36,8 +68,14 @@
 
 /* Image styling */
 .ticket-details-image {
-  max-width: 100%;
-  height: auto;
+  max-width: 50%;
+  max-height: 50%;
   margin-bottom: 20px;
   border-radius: 20px;
+}
+
+.ticket-info-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-weight: 500;
 }
