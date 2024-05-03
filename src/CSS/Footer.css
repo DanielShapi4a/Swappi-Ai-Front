@@ -1,13 +1,13 @@
 .footer {
-    margin: 0;
     overflow-x: hidden;
     background: #000;
-    padding: 1px 0px;
     font-family: "Play", sans-serif;
     text-align: center;
     color: #fff; /* Set the text color to white */
-  }
-  
+    width: 100%;
+    position: fixed; 
+    bottom: 0; 
+}
   .footer .row {
     justify-content: center;
     width: 100%;
