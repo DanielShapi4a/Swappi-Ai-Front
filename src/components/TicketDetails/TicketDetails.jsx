@@ -67,36 +67,36 @@ function TicketDetails() {
   }, [ticket, categoryNames]);
 
   return (
-    <div className={`ticket-page ${backGround}`}>
-      <Navbar />
-      <div className="ticket-details-container">
-        {loading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div>{error}</div>
-        ) : !ticket ? (
-          <div>No ticket found.</div>
-        ) : (
-          <div className="main-ticket-content">
-            <div className="ticket-header-container">
-              <h2 className="ticket-details-title">{ticket.title}</h2>
-              <img src={ticket.image} alt={ticket.title} className="ticket-details-image" />
+      <div className={`ticket-page ${backGround}`}>
+        <Navbar />
+        <div className="ticket-details-container">
+          {loading ? (
+            <div>Loading...</div>
+          ) : error ? (
+            <div>{error}</div>
+          ) : !ticket ? (
+            <div>No ticket found.</div>
+          ) : (
+            <div className="main-ticket-content">
+              <div className="ticket-header-container">
+                <h2 className="ticket-details-title">{ticket.title}</h2>
+                <img src={ticket.image} alt={ticket.title} className="ticket-details-image" />
+              </div>
+              <p className="ticket-details-description">{ticket.description}</p>
+              <div className="ticket-info-container">
+                <p className="ticket-details-price">Price: {ticket.price}₪</p>
+                <p className="ticket-details-details">City: {ticket.city}</p>
+                <p className="ticket-details-details">Category: {ticket.category}</p>
+                {/* Add more details as needed */}
+              </div>
+              <p className="ticket-details-details" style={{ marginTop: "8rem", fontWeight: "500" }}>
+                Seller: {ticket.seller.name}
+              </p>
             </div>
-            <p className="ticket-details-description">{ticket.description}</p>
-            <div className="ticket-info-container">
-              <p className="ticket-details-price">Price: {ticket.price}₪</p>
-              <p className="ticket-details-details">City: {ticket.city}</p>
-              <p className="ticket-details-details">Category: {ticket.category}</p>
-              {/* Add more details as needed */}
-            </div>
-            <p className="ticket-details-details" style={{ marginTop: "8rem", fontWeight: "500" }}>
-              Seller: {ticket.seller.name}
-            </p>
-          </div>
-        )}
+          )}
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
   );
 }
 

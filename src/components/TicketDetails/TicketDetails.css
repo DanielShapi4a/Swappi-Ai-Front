@@ -3,10 +3,7 @@
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the background image from repeating */
   height: 100%; /* Sets the height of the container to 100% of the viewport height */
-  display: flex; /* Enables Flexbox layout */
-  flex-direction: column; /* Aligns children in a column */
-  justify-content: space-between;
-  background-size: cover;
+  justify-content: space-between;  
 }
 
 .sport {
@@ -23,13 +20,11 @@
 }
 
 /* Additional styles for children components */
-.ticket-page > * {
-  flex: 1; /* Makes children components fill the available space */
-}
+
 
 /* Container styling */
 .ticket-details-container {
-  max-width: 500px;
+  max-width: 60vh;
   max-height: auto;
   margin: 20px auto;
   padding: 20px;
@@ -37,7 +32,7 @@
   opacity: 0.93;
   border-radius: 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  flex: auto;
+  /* flex: auto; */
   justify-content: center;
 }
 
