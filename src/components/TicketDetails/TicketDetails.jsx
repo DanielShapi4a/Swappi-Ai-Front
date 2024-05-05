@@ -11,43 +11,38 @@ function TicketDetails() {
   const [ticket, setTicket] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [backGround, setBackGround] = useState("") // background state
+  const [backGround, setBackGround] = useState(""); // background state
   const [categoryNames, setCategoryNames] = useState([]);
 
   const fetchCategoryNames = async () => {
-      try {
-        const names = await getCategoryNames();
-        setCategoryNames(names);
-        console.log("Category names:",names );
-      } catch (error) {
-        console.error('Error fetching category names:', error);
+    try {
+      const names = await getCategoryNames();
+      setCategoryNames(names);
+      console.log("Category names:", names);
+    } catch (error) {
+      console.error("Error fetching category names:", error);
     }
-  }
+  };
   const setBackgroundImage = async () => {
-    console.log("Ticket Category",ticket.category);
-    try{
+    console.log("Ticket Category", ticket.category);
+    try {
       if (ticket && categoryNames.length > 0) {
-        const foundCategory = categoryNames.find(category => category === ticket.category);
+        const foundCategory = categoryNames.find((category) => category === ticket.category);
         if (foundCategory) {
-          if (foundCategory === 'Concert') {
+          if (foundCategory === "Concert") {
             setBackGround("concert");
-          }
-          else if (foundCategory === 'Flight' || foundCategory === 'Hotel' ||  foundCategory === 'Vacation') {
+          } else if (foundCategory === "Flight" || foundCategory === "Hotel" || foundCategory === "Vacation") {
             setBackGround("vacation");
-          }
-          else if (foundCategory === 'Sport') {
+          } else if (foundCategory === "Sport") {
             setBackGround("sport");
-          }
-          else if (foundCategory === 'Other') {
+          } else if (foundCategory === "Other") {
             setBackGround("other");
           }
         }
-    }
-    else {
-      setBackGround("other");
+      } else {
+        setBackGround("other");
       }
-    }
-    catch (error) {
+    } catch (error) {
       setBackGround("other");
     }
   };
@@ -68,8 +63,7 @@ function TicketDetails() {
   }, [id]);
 
   useEffect(() => {
-    if(ticket)
-    setBackgroundImage();
+    if (ticket) setBackgroundImage();
   }, [ticket, categoryNames]);
 
   return (
@@ -90,16 +84,18 @@ function TicketDetails() {
             </div>
             <p className="ticket-details-description">{ticket.description}</p>
             <div className="ticket-info-container">
-              <p className="ticket-details-price">Price: ${ticket.price}</p>
+              <p className="ticket-details-price">Price: {ticket.price}₪</p>
               <p className="ticket-details-details">City: {ticket.city}</p>
               <p className="ticket-details-details">Category: {ticket.category}</p>
               {/* Add more details as needed */}
             </div>
-            <p className="ticket-details-details" style={{marginTop: "8rem", fontWeight: "500"}}>Seller: {ticket.seller.name}</p>
+            <p className="ticket-details-details" style={{ marginTop: "8rem", fontWeight: "500" }}>
+              Seller: {ticket.seller.name}
+            </p>
           </div>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
