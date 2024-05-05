@@ -35,7 +35,7 @@ function MainPage() {
 
 
   return (
-    <div className="App">
+    <div className="main-page">
       <Navbar userData={user} style={{ marginBottom: "100px" }} /> {/* Pass user data to Navbar */}
       <MainContent>
         <CustomDiv /> {/* Main Area of the site where we generate a picture */}
@@ -47,7 +47,7 @@ function MainPage() {
           ))}
         </div> */}
       </MainContent>
-      <Footer />
+      <Footer/>
     </div>
   );
 }

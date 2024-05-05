@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../../components/Footer";
 
 const SellsPage = () => {
   return (
@@ -9,6 +10,7 @@ const SellsPage = () => {
         <h3>Current Sells</h3>
         {/* Display sells data here */}
       </div>
+      <Footer/>
     </div>
   );
 };
