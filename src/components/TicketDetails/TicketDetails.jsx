@@ -30,19 +30,15 @@ function TicketDetails() {
         const foundCategory = categoryNames.find(category => category === ticket.category);
         if (foundCategory) {
           if (foundCategory === 'Concert') {
-            console.log("in Concert");
             setBackGround("concert");
           }
           else if (foundCategory === 'Flight' || foundCategory === 'Hotel' ||  foundCategory === 'Vacation') {
-            console.log("in Vacation");
             setBackGround("vacation");
           }
           else if (foundCategory === 'Sport') {
-            console.log("in Sport");
             setBackGround("sport");
           }
           else if (foundCategory === 'Other') {
-            console.log("in other");
             setBackGround("other");
           }
         }

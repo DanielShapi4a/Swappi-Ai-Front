@@ -68,6 +68,7 @@ function CategoryGrid({ selectedCategory }) {
                 title={category.title}
                 description={category.description}
                 image={category.image}
+                price ={category.price}
               />
             );
           })}
