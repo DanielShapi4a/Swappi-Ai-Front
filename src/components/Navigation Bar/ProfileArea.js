@@ -3,11 +3,11 @@ import { Avatar, StyledButton } from "../../assets/styles.js";
 import defaultProfileImage from "../../assets/images/default-profile-image.png";
 import LoginModal from "../Login Pop-UP/LoginModal.jsx";
 import { useAuth } from "../../pages/contexts/authContext.js";
-import { logoutUser } from "../../services/userData.js";
+import axios from 'axios';
+import { API_URL } from "../../services/constants.js";
 
 const ProfileArea = () => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-
   const { user, setUser } = useAuth();
 
   const handleLoginSuccess = (userData) => {
@@ -15,10 +15,13 @@ const ProfileArea = () => {
     setLoginModalOpen(false); // Close the login modal
   };
 
-  const handleLogout = () => {
-    // Handle logout if needed
-    logoutUser();
-    setUser(null);
+  const handleLogout = async () => {
+    try {
+      await axios.get(`${API_URL}/auth/logout`); 
+      setUser(null);
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
   };
 
   const openLoginModal = () => {

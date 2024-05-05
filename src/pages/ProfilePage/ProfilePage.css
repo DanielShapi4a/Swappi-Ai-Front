@@ -79,7 +79,7 @@
   margin-top: 20px;
 }
 
-.edit-buttons button {
+.edit-buttons button, .edit-button {
   background-color: #4caf50;
   color: #fff;
   border: none;

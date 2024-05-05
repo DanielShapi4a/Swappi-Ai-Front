@@ -65,6 +65,7 @@ export async function loginUser(email, password) {
   }
 }
 
+
 export async function getUser() {
   try {
     const response = await fetch(`${API_URL}/auth/getuserdatabytoken`, { credentials: "include" });
