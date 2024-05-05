@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Ticket from "../../components/Categories/Ticket.js";
+import Navbar from "../../components/Navigation Bar/Navbar.js";
+import Footer from "../../components/Footer.js";
+import "./OrdersPage.css";
 
 function OrdersPage() {
   const [wishedProducts, setWishedProducts] = useState([]);
@@ -47,7 +50,10 @@ function OrdersPage() {
   }, [currentPage, hasMore]); // Dependency array only includes currentPage and hasMore
 
   return (
-    <div className="orders-page">
+    
+   <div>
+      <Navbar/>
+      <div className="orders-page">
       {loading ? (
         <div>Loading...</div>
       ) : error ? (
@@ -68,6 +74,8 @@ function OrdersPage() {
         </div>
       )}
       {!hasMore && <div>No more products to load.</div>}
+      </div>
+      <Footer/>
     </div>
   );
 }

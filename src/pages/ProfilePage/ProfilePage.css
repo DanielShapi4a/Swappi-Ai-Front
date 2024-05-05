@@ -1,6 +1,6 @@
 .profile-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   background-color: #f4f4f4;
   border-radius: 10px;
@@ -11,6 +11,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 .profile-header {

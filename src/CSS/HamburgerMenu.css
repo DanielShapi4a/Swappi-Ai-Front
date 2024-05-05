@@ -4,7 +4,6 @@
   display: inline-block;
   cursor: pointer;
   margin-left: 10px; /* Adjust margin as needed */
-  padding: 10px 20px; /* Increase padding to make the button wider */
 }
 
 .hamburger-menu .menu-button img {
@@ -26,7 +25,6 @@
   display: none;
   background-color: #fff;
   border-radius: 5px;
-  padding: 10px 0; /* Add padding for spacing */
 }
 
 .menu-options.show {
@@ -41,15 +39,19 @@
 .menu-options .menu-item {
   color: #000; /* Black text color */
   padding: 10px;
-  margin: 5px 0; /* Add margin between options */
 }
 
 .menu-item {
   cursor: pointer;
   padding: 20px 20px;
+  margin: 10px;
   transition: background-color 0.3s, border-radius 0.3s; /* Add transitions for smooth hover effect */
   border-radius: 5px; /* Add border radius */
+  display: block;
+  text-decoration: none;
+
 }
+
 
 /* Style for the menu items when hovered */
 .menu-item:hover {

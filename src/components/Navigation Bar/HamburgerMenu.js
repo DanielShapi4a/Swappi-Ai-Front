@@ -21,6 +21,7 @@ const HamburgerMenu = () => {
       <div className={`menu-options ${menuOpen ? 'show' : ''}`} style={{zIndex:'999'}}>
         {/* Add your menu options here */}
         <ul>
+          <Link className="menu-item" to={"/"}>Home</Link>
           <Link className="menu-item" to={"/user/"}>Profile</Link>
           <Link className="menu-item" to={"/orders/"}>Orders</Link>
           <Link className="menu-item" to={"/sells/"}>Sells</Link>

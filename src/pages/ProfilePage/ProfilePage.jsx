@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./ProfilePage.css";
 import { editUserProfile } from "../../services/userData";
+import Navbar from "../../components/Navigation Bar/Navbar";
+import Footer from "../../components/Footer";
 
 const EditableField = ({ label, value, name, type, onChange }) => (
   <div className="edit-input">
@@ -59,40 +61,44 @@ const ProfilePage = ({ user }) => {
   };
 
   return (
-    <div className="profile-container">
-      <div className="profile-header">
-        <div className="avatar-section">
-          {/* Avatar display and change option */}
-          <img src={editedUser.avatar} alt="Avatar" className="avatar-image" />
-          <button className="change-avatar-btn">Change Avatar</button>
-        </div>
-        <h2>Welcome, {editedUser.name}</h2>
-      </div>
-      <div className="profile-section user-data-section">
-        <h3>User Data</h3>
-        {isEditing ? (
-          <EditForm user={editedUser} onSave={handleSave} onCancel={handleCancel} onChange={handleChange} />
-        ) : (
-          <div className="data-item">
-            <p>
-              <strong>Name:</strong> {editedUser.name}
-            </p>
-            <p>
-              <strong>Gender:</strong> {editedUser.gender}
-            </p>
-            <p>
-              <strong>Phone Number:</strong> {editedUser.phoneNumber}
-            </p>
-            <p>
-              <strong>Email:</strong> {editedUser.email}
-            </p>
-            <p>
-              <strong>Password:</strong> *********
-            </p>
-            <button onClick={handleEdit}>Edit User</button>
+    <div>      
+      <Navbar/>
+      <div className="profile-container">
+        <div className="profile-header">
+          <div className="avatar-section">
+            {/* Avatar display and change option */}
+            <img src={editedUser.avatar} alt="Avatar" className="avatar-image" />
+            <button className="change-avatar-btn">Change Avatar</button>
           </div>
-        )}
+          <h2>Welcome, {editedUser.name}</h2>
+        </div>
+        <div className="profile-section user-data-section">
+          <h3>User Data</h3>
+          {isEditing ? (
+            <EditForm user={editedUser} onSave={handleSave} onCancel={handleCancel} onChange={handleChange} />
+          ) : (
+            <div className="data-item">
+              <p>
+                <strong>Name:</strong> {editedUser.name}
+              </p>
+              <p>
+                <strong>Gender:</strong> {editedUser.gender}
+              </p>
+              <p>
+                <strong>Phone Number:</strong> {editedUser.phoneNumber}
+              </p>
+              <p>
+                <strong>Email:</strong> {editedUser.email}
+              </p>
+              <p>
+                <strong>Password:</strong> *********
+              </p>
+              <button onClick={handleEdit}>Edit User</button>
+            </div>
+          )}
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 };

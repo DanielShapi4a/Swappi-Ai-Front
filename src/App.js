@@ -5,9 +5,9 @@ import MainPage from "./pages/MainPage/MainPage.jsx";
 import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import TicketDetails from "./components/TicketDetails/TicketDetails.jsx";
 import { AuthProvider } from "./pages/contexts/authContext.js";
-import UserPage from "./pages/UserPage/UserPage.jsx";
 import SellsPage from "./pages/SellsPage/SellsPage.jsx";
 import OrdersPage from "./pages/OrdersPage/OrdersPage.jsx";
+import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/ticket/:id" element={<TicketDetails />} />
             <Route path="/sign-in/" element={<SignInPage />} />
-            <Route path="/user/" element={<UserPage />} />
+            <Route path="/user/" element={<ProfilePage />} />
             <Route path="/orders/" element={<OrdersPage />} />
             <Route path="/sells/" element={<SellsPage />} />
             {/* Add more routes for other pages as needed */}
