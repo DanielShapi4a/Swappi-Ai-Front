@@ -3,10 +3,7 @@
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the background image from repeating */
   height: 100%; /* Sets the height of the container to 100% of the viewport height */
-  display: flex; /* Enables Flexbox layout */
-  flex-direction: column; /* Aligns children in a column */
   justify-content: space-between;
-  background-size: cover;
 }
 
 .sport {
