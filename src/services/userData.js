@@ -65,6 +65,7 @@ export async function loginUser(email, password) {
   }
 }
 
+
 export async function getUser() {
   try {
     const response = await fetch(`${API_URL}/auth/getuserdatabytoken`, { credentials: "include" });
@@ -104,16 +105,18 @@ export async function getUserWishlist() {
   );
 }
 
-export async function editUserProfile(id, data) {
+export async function editUserProfile(id, data, avatarData) {
+  const formData = new FormData();
+  formData.append('userData', JSON.stringify(data));
+  formData.append('avatar', avatarData);
+
   return await fetch(`${API_URL}/users/updateUser/${id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
     credentials: "include",
-    body: JSON.stringify(data),
+    body: formData,
   }).json();
 }
+
 
 export async function getUserById(id) {
   try {
