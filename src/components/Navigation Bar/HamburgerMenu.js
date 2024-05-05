@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../CSS/HamburgerMenu.css'; // Import CSS for styling
 import HamburgerIcon from '../../assets/images/hamburger-icon.png';
+import { Link } from 'react-router-dom';
 
 const HamburgerMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,9 +21,10 @@ const HamburgerMenu = () => {
       <div className={`menu-options ${menuOpen ? 'show' : ''}`} style={{zIndex:'999'}}>
         {/* Add your menu options here */}
         <ul>
-          <li className="menu-item">Option 1</li>
-          <li className="menu-item">Option 2</li>
-          <li className="menu-item">Option 3</li>
+          <Link className="menu-item" to={"/user/"}>Profile</Link>
+          <Link className="menu-item" to={"/orders/"}>Orders</Link>
+          <Link className="menu-item" to={"/sells/"}>Sells</Link>
+
         </ul>
       </div>
     </div>
