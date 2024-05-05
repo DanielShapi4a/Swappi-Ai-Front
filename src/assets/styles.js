@@ -10,7 +10,6 @@ export const StyledButton = styled.button`
   padding: 8px 16px;
   cursor: pointer;
   font-size: 14px;
-  margin: 10px; 
 `;
 
 export const Avatar = styled.img`

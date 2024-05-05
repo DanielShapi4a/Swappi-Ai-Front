@@ -3,12 +3,14 @@
     background: #000;
     font-family: "Play", sans-serif;
     text-align: center;
-    color: #fff; /* Set the text color to white */
+    color: #fff; 
     width: 100%;
-    position: fixed; 
-    bottom: 0; 
+    bottom: -25px; 
+    position: relative; 
+    margin: 0px;
+    padding: 0px;
 }
-  .footer .row {
+.row {
     justify-content: center;
     width: 100%;
     margin: 0.3% 0%;
@@ -17,42 +19,26 @@
     display: flex;
 }
   
-  .footer .row a {
+.row a {
     text-decoration: none;
-    color: #fff; /* Set the link color to white */
+    color: #fff; 
     transition: 0.5s;
   }
   
-  .footer .row a:hover {
-    color: #fff; /* Set the link color to white on hover */
+.row a:hover {
+    color: #3584de7a; 
   }
   
-  .footer .row ul {
+.row ul {
     width: 100%;
   }
   
-  .footer .row ul li {
+.row ul li {
     display: inline-block;
     margin: 0px 30px;
   }
   
-  .footer .row a i {
+.row a i {
     font-size: 10px;
     margin: 0% 1%;
-  }
-  
-  @media (max-width: 720px) {
-    .footer {
-      text-align: left;
-      padding: 5%;
-    }
-    .footer .row ul li {
-      display: block;
-      margin: 10px 0px;
-      text-align: left;
-    }
-    .footer .row a i {
-      margin: 0% 3%;
-    }
-  }
-  
+}

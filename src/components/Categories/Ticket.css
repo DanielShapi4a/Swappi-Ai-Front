@@ -4,7 +4,6 @@
     flex-direction: column;
     height: 100%;
     max-width: 97%; /* Maximum width for grid items */
-    margin: 0 auto; /* Center grid items in their cells */
 }
   
 .category-image {

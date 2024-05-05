@@ -5,20 +5,20 @@
   height: 100vh; /* Sets the height of the container to 100% of the viewport height */
   display: flex; /* Enables Flexbox layout */
   flex-direction: column; /* Aligns children in a column */
-  justify-content: space-between; /* Vertically distributes the space between children */
+  justify-content: space-between;
 }
 
 .sport{
-    background-image: url('C:\Git\Swappi-Ai-Front\src\assets\backGroundImages\backGround sport picture.jpg');
+    background-image: url('../../assets/backGroundImages/backGround sport picture.jpg');
 }
 .vacation{
-  background-image: url('C:\Git\Swappi-Ai-Front\src\assets\backGroundImages\backGround vacation picture.jpg');
+  background-image: url('../../assets/backGroundImages/backGround vacation picture.jpg');
 }
 .concert{
-  background-image: url('C:\Git\Swappi-Ai-Front\src\assets\backGroundImages\backGround concert picture.jpg');
+  background-image: url('../../assets/backGroundImages/backGround concert picture.jpg');
 }
 .other{
-  background-image: url('C:\Git\Swappi-Ai-Front\src\assets\backGroundImages\backGround other picture.jpg');
+  background-image: url('../../assets/backGroundImages/backGround other picture.jpg');
 }
 
 /* Additional styles for children components */
