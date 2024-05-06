@@ -4,6 +4,7 @@
   flex-direction: column;
   height: 100%;
   max-width: 97%; /* Maximum width for grid items */
+  background-color: rgb(240, 229, 229);
 }
 
 .category-image {

@@ -26,16 +26,16 @@ function HotOffer() {
 
   return (
     <div style={{textAlign:'left', width:'80%', margin:'10px'}}>
-      <div className='Title' style={{ fontSize: '15px', fontWeight: 'bold', color: '#1B729D' }}>
+      <div className='Title' style={{ fontSize:"2rem", fontWeight: 'bold', color: '#1B729D' }}>
         Hot Offers
       </div>
       <div className='Last-offers' color='grey' style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ fontWeight: 'bold', fontSize: '20px' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '20px',fontSize:"1.5rem" }}>
           Last offers of the week
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <span style={{ fontWeight: '500', color: 'grey', maxWidth: '80%' }}>
-            Explore our best offers so you could be spontaneous.
+          <span style={{ fontWeight: '500', color: 'grey', maxWidth: '80%', fontSize:"1.75rem" }}>
+            Explore our best offers!
           </span>
           <span style={{ cursor: 'pointer', fontWeight: 'bold', color: '#1B729D' }} onClick={toggleFilter}>
             Filter
@@ -46,7 +46,7 @@ function HotOffer() {
       {isFilterOpen && (
         <div>
           {/* Render your filter options here using the categoryNames state */}
-          <div className='filter-options'>
+          <div className='filter-options' style={{display:"flex", gap:"4rem", fontSize:"1.5rem", marginBottom:"2rem"}}>
             {categoryNames.map((category, index) => (
               <div key={index}>{category}</div>
             ))}
