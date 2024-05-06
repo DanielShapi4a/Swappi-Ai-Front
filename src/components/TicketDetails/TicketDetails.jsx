@@ -92,6 +92,10 @@ function TicketDetails() {
             <p className="ticket-details-details" style={{ marginTop: "8rem", fontWeight: "500" }}>
               Seller: {ticket.seller.name}
             </p>
+            <div style={{display:"flex", justifyContent:"space-evenly"}}>
+              <button className="ticket-button-add">Add Ticket</button>
+              <button className="ticket-button-remove">Remove Ticket</button>
+            </div>
           </div>
         )}
       </div>
