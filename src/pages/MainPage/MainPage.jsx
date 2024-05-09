@@ -28,19 +28,19 @@ function MainPage() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [selectedCategory, currentPage, hasMore, loadingData, products]);
+  }, [currentPage, hasMore, loadingData, products, selectedCategory]);
 
-
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
  
-
-
   return (
     <div className="main-page">
       <Navbar userData={user} style={{ marginBottom: "100px" }} /> {/* Pass user data to Navbar */}
       <MainContent>
         <CustomDiv /> {/* Main Area of the site where we generate a picture */}
-        <HotOffer />
-        <CategoryGrid selectedCategory={selectedCategory} />
+        <HotOffer onCategoryChange={handleCategoryChange} />
+        <CategoryGrid selectedCategory={selectedCategory}/>
         {/* <div className="ProductGridContainer">
           {products.map((product) => (
             <div key={product._id}>{product.title}</div>

@@ -1,4 +1,3 @@
-// CategoryGrid.js
 import React, { useEffect, useState } from 'react';
 import Ticket from './Ticket.js';
 import { getAll } from '../../services/productData';
@@ -6,21 +5,24 @@ import './Ticket.css';
 import './CategoryGrid.css';
 
 function CategoryGrid({ selectedCategory }) {
-  const [categories, setCategories] = useState([]);
+  const [data, setData] = useState([]);//data in here
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [currentCategory, setCurrentCategory] = useState(selectedCategory || "all");
 
   useEffect(() => {
-    async function loadMoreProducts(page) {
+    setCurrentCategory(selectedCategory);
+    const loadMoreProducts = async (page) => {
       try {
-        const data = await getAll(page, selectedCategory);
-        if (Array.isArray(data.products)) {
-          if (data.products.length === 0) {
-            setHasMore(false);
+        const newData = await getAll(page, currentCategory);
+        if (newData.products) {
+          if (newData.products.length === 0) {
+            // Handle case when no products are returned
+            setData([]);
+            alert("No tickets in the current category");
           } else {
-            setCategories((prevCategories) => [...prevCategories, ...data.products]);
+            setData(newData.products);
           }
           setLoading(false);
         }
@@ -29,26 +31,14 @@ function CategoryGrid({ selectedCategory }) {
         setError('Error loading data. Please try again later.');
         setLoading(false);
       }
-    }
+    };
 
-    if (currentPage === 1) {
-      loadMoreProducts(currentPage);
-    }
-
-    function handleScroll() {
-      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 100) {
-        if (hasMore) {
-          setCurrentPage((prevPage) => prevPage + 1);
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll);
+    loadMoreProducts(currentPage);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      // Cleanup function
     };
-  }, [selectedCategory, currentPage, hasMore]);
+  }, [currentCategory, currentPage, selectedCategory]);
 
   return (
     <div className="categories-section">
@@ -56,25 +46,24 @@ function CategoryGrid({ selectedCategory }) {
         <div>Loading...</div>
       ) : error ? (
         <div>{error}</div>
-      ) : categories.length === 0 ? (
+      ) : data.length === 0 ? (
         <div>No categories found.</div>
       ) : (
         <div className="category-grid">
-          {categories.map((category) => {
+          {data.map((dataItem, key) => {
             return (
               <Ticket
-                key={category.id}
-                id={category._id}
-                title={category.title}
-                description={category.description}
-                image={category.image}
-                price ={category.price}
+                key={dataItem.id}
+                id={dataItem._id}
+                title={dataItem.title}
+                description={dataItem.description}
+                image={dataItem.image}
+                price={dataItem.price}
               />
             );
           })}
         </div>
       )}
-      {!hasMore && <div>No more products to load.</div>}
     </div>
   );
 }

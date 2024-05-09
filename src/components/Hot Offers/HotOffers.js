@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getCategoryNames } from '../../services/productData';
 
-function HotOffer() {
+function HotOffer( {onCategoryChange}) {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [categoryNames, setCategoryNames] = useState([]);
+  const [currentCategory, setCurrentCategory] = useState("");
 
   const toggleFilter = async () => {
     if (!isFilterOpen) {
@@ -14,15 +15,17 @@ function HotOffer() {
         console.error('Error fetching category names:', error);
       }
     }
-
     setFilterOpen(!isFilterOpen);
   };
 
   useEffect(() => {
-    if (isFilterOpen) {
-      // Additional logic for handling filter open state
-    }
   }, [isFilterOpen]);
+
+  const HandleCategoryChange = (category) => {
+    setCurrentCategory(category);
+    onCategoryChange(category);
+    console.log("selected:", category);
+  };
 
   return (
     <div style={{textAlign:'left', width:'80%', margin:'10px'}}>
@@ -48,8 +51,9 @@ function HotOffer() {
           {/* Render your filter options here using the categoryNames state */}
           <div className='filter-options' style={{display:"flex", gap:"4rem", fontSize:"1.5rem", marginBottom:"2rem"}}>
             {categoryNames.map((category, index) => (
-              <div key={index}>{category}</div>
+              <button key={category} onClick={() => HandleCategoryChange(category)}>{category}</button>
             ))}
+            <button onClick={() => HandleCategoryChange("all")}>Show All</button>
           </div>
         </div>
       )}

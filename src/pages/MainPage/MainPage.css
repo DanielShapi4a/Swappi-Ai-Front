@@ -1,7 +1,6 @@
 /* MainPage.css */
 .main-page {
     text-align: center;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(213, 213, 213, 1) 100%);
   }
 .MainContent {
     display: flex;
