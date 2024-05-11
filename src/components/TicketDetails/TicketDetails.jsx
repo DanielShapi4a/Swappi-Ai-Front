@@ -24,18 +24,20 @@ function TicketDetails() {
     }
   };
   const setBackgroundImage = async () => {
-    console.log("Ticket Category", ticket.category);
+    console.log("Ticket Category:", ticket.category);
+    console.log("Category names:", categoryNames);
     try {
       if (ticket && categoryNames.length > 0) {
-        const foundCategory = categoryNames.find((category) => category === ticket.category);
+        const foundCategory = categoryNames.some((category) => category.category_Name === ticket.category);
+        console.log("Found category:", foundCategory);
         if (foundCategory) {
-          if (foundCategory === "Concert") {
+          if (ticket.category === "Concert") {
             setBackGround("concert");
-          } else if (foundCategory === "Flight" || foundCategory === "Hotel" || foundCategory === "Vacation") {
+          } else if (ticket.category === "Flight" || ticket.category === "Hotel" || ticket.category === "Vacation") {
             setBackGround("vacation");
-          } else if (foundCategory === "Sport") {
+          } else if (ticket.category === "Sport") {
             setBackGround("sport");
-          } else if (foundCategory === "Other") {
+          } else {
             setBackGround("other");
           }
         }
@@ -43,9 +45,11 @@ function TicketDetails() {
         setBackGround("other");
       }
     } catch (error) {
+      console.error("Error setting background:", error);
       setBackGround("other");
     }
   };
+  
 
   useEffect(() => {
     const fetchData = async () => {

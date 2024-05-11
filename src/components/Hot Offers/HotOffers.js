@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getCategoryNames } from '../../services/productData';
+import { getCategoryNames, getDataForCategoryByName } from '../../services/productData';
 
-function HotOffer( {onCategoryChange}) {
+function HotOffer({ onCategoryChange }) {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [categoryNames, setCategoryNames] = useState([]);
   const [currentCategory, setCurrentCategory] = useState("");
@@ -9,7 +9,9 @@ function HotOffer( {onCategoryChange}) {
   const toggleFilter = async () => {
     if (!isFilterOpen) {
       try {
-        const names = await getCategoryNames();
+        const data = await getCategoryNames();
+        const names = data.map(category => category.category_Name);
+        console.log("Names got from getCategoryNames:",names);
         setCategoryNames(names);
       } catch (error) {
         console.error('Error fetching category names:', error);
@@ -21,23 +23,31 @@ function HotOffer( {onCategoryChange}) {
   useEffect(() => {
   }, [isFilterOpen]);
 
-  const HandleCategoryChange = (category) => {
-    setCurrentCategory(category);
-    onCategoryChange(category);
-    console.log("selected:", category);
+  const HandleCategoryChange = async (category) => {
+    if (category === "all") {
+      setCurrentCategory(category);
+      onCategoryChange(category);
+    } else {
+      try {
+        setCurrentCategory(category);
+        onCategoryChange(category);
+      } catch (error) {
+        console.error('Error fetching category:', error);
+      }
+    }
   };
 
   return (
-    <div style={{textAlign:'left', width:'80%', margin:'10px'}}>
-      <div className='Title' style={{ fontSize:"2rem", fontWeight: 'bold', color: '#1B729D' }}>
+    <div style={{ textAlign: 'left', width: '80%', margin: '10px' }}>
+      <div className='Title' style={{ fontSize: "2rem", fontWeight: 'bold', color: '#1B729D' }}>
         Hot Offers
       </div>
       <div className='Last-offers' color='grey' style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ fontWeight: 'bold', fontSize: '20px',fontSize:"1.5rem" }}>
+        <div style={{ fontWeight: 'bold', fontSize: '20px', fontSize: "1.5rem" }}>
           Last offers of the week
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <span style={{ fontWeight: '500', color: 'grey', maxWidth: '80%', fontSize:"1.75rem" }}>
+          <span style={{ fontWeight: '500', color: 'grey', maxWidth: '80%', fontSize: "1.75rem" }}>
             Explore our best offers!
           </span>
           <span style={{ cursor: 'pointer', fontWeight: 'bold', color: '#1B729D' }} onClick={toggleFilter}>
@@ -49,9 +59,9 @@ function HotOffer( {onCategoryChange}) {
       {isFilterOpen && (
         <div>
           {/* Render your filter options here using the categoryNames state */}
-          <div className='filter-options' style={{display:"flex", gap:"4rem", fontSize:"1.5rem", marginBottom:"2rem"}}>
+          <div className='filter-options' style={{ display: "flex", gap: "4rem", fontSize: "1.5rem", marginBottom: "2rem" }}>
             {categoryNames.map((category, index) => (
-              <button key={category} onClick={() => HandleCategoryChange(category)}>{category}</button>
+              <button key={index} onClick={() => HandleCategoryChange(category)}>{category}</button>
             ))}
             <button onClick={() => HandleCategoryChange("all")}>Show All</button>
           </div>
