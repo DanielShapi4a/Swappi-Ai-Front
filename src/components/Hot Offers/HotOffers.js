@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getCategoryNames, getDataForCategoryByName } from '../../services/productData';
+import { getCategoryNames } from '../../services/productData';
 
 function HotOffer({ onCategoryChange }) {
   const [isFilterOpen, setFilterOpen] = useState(false);
@@ -24,17 +24,18 @@ function HotOffer({ onCategoryChange }) {
   }, [isFilterOpen]);
 
   const HandleCategoryChange = async (category) => {
-    if (category === "all") {
-      setCurrentCategory(category);
-      onCategoryChange(category);
-    } else {
       try {
         setCurrentCategory(category);
         onCategoryChange(category);
       } catch (error) {
         console.error('Error fetching category:', error);
       }
-    }
+    
+  };
+
+  const handleShowAll = async () => {
+    setCurrentCategory("all");
+    onCategoryChange("all");
   };
 
   return (
@@ -63,7 +64,7 @@ function HotOffer({ onCategoryChange }) {
             {categoryNames.map((category, index) => (
               <button key={index} onClick={() => HandleCategoryChange(category)}>{category}</button>
             ))}
-            <button onClick={() => HandleCategoryChange("all")}>Show All</button>
+            <button onClick={() => handleShowAll()}>Show All</button>
           </div>
         </div>
       )}

@@ -18,6 +18,17 @@ import { API_URL } from "./constants";
 //     throw error;
 //   }
 // }
+export async function HandleGetAllTickets() {
+  try {
+    const response = await fetch(`${API_URL}/tickets/`, { credentials: "include" });
+    const data = await response.json();
+    console.log("all ids fetched:", data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching all tickets:", error);
+    throw error;
+  }
+}
 
 export async function getCategoryNames() {
   try {
@@ -32,10 +43,8 @@ export async function getCategoryNames() {
 
 export async function getDataForCategoryByName(name) {
   try {
-    console.log("Trying to fetch from front-end:", name);
     const response = await fetch(`${API_URL}/tickets/ticketsByCategory/${name}`, { credentials: "include" });
     const data = await response.json();
-    console.log("Data for the spesific wanted category = ", name,":", data);
     return data;
   } catch (error) {
     console.error("Error fetching category:", error);
