@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { API_URL } from '../../services/constants.js';
 import Ticket from './Ticket.js';
-import { getDataForCategoryByName } from '../../services/productData'; // Import the function to fetch category data
+import { getSpecific } from '../../services/productData'; // Import the function to fetch specific ticket data
 import './Ticket.css';
 import './CategoryGrid.css';
+import { getDataForCategoryByName, HandleGetAllTickets } from '../../services/productData';
 
 function CategoryGrid({ selectedCategory }) {
   const [tickets, setTickets] = useState([]);
@@ -14,25 +15,46 @@ function CategoryGrid({ selectedCategory }) {
     const fetchTickets = async () => {
       try {
         setLoading(true);
-        console.log("Fetching tickets for category:", selectedCategory);
-        // Fetch category data by name
-        const categoryData = await getDataForCategoryByName(selectedCategory);
-        console.log("Category data:", categoryData);
-        const ticketIds = categoryData.ticketIds;
-        console.log("Ticket IDs:", ticketIds);
-        const ticketPromises = ticketIds.map(async (ticketId) => {
-          // Fetch ticket data by ID
-          console.log("Fetching ticket data for ticket ID:", ticketId);
-          const response = await fetch(`${API_URL}/tickets/getTicket/${ticketId}`, { credentials: "include" });
-          const ticketData = await response.json();
-          console.log("Ticket data:", ticketData);
-          return ticketData;
-        });
-        // Resolve all ticket promises
-        const ticketResults = await Promise.all(ticketPromises);
-        console.log("Resolved ticket results:", ticketResults);
-        setTickets(ticketResults);
-        setLoading(false);
+        if (selectedCategory !== "all") {
+          console.log("Fetching tickets for category:", selectedCategory);
+          // Fetch category data by name
+          const categoryData = await getDataForCategoryByName(selectedCategory);
+          console.log("Category data:", categoryData);
+          const ticketIds = categoryData.ticketIds;
+          console.log("Ticket IDs:", ticketIds);
+          const ticketPromises = ticketIds.map(async (ticketId) => {
+            // Fetch ticket data by ID
+            console.log("Fetching ticket data for ticket ID:", ticketId);
+            const response = await fetch(`${API_URL}/tickets/getTicket/${ticketId}`, { credentials: "include" });
+            const ticketData = await response.json();
+            console.log("Ticket data:", ticketData);
+            return ticketData;
+          });
+          // Resolve all ticket promises
+          const ticketResults = await Promise.all(ticketPromises);
+          console.log("Resolved ticket results:", ticketResults);
+          setTickets(ticketResults);
+          setLoading(false);
+        } else {
+          // Handle case when "all" category is selected
+          const allTicketsData = await HandleGetAllTickets();
+          const allTicketIds = allTicketsData.ticketIds;
+          console.log("All tickets data:", allTicketsData);
+          console.log("All ticket IDs:", allTicketIds);
+          const ticketPromises = allTicketIds.map(async (ticketId) => {
+            // Fetch ticket data by ID
+            console.log("Fetching ticket data for ticket ID:", ticketId);
+            const response = await fetch(`${API_URL}/tickets/getTicket/${ticketId}`, { credentials: "include" });
+            const ticketData = await response.json();
+            console.log("Ticket data:", ticketData);
+            return ticketData;
+          });
+          // Resolve all ticket promises
+          const ticketResults = await Promise.all(ticketPromises);
+          console.log("Resolved ticket results:", ticketResults);
+          setTickets(ticketResults);
+          setLoading(false);
+        }
       } catch (error) {
         console.error('Error fetching tickets:', error);
         setError('Error loading tickets. Please try again later.');
@@ -40,13 +62,7 @@ function CategoryGrid({ selectedCategory }) {
       }
     };
 
-    if (selectedCategory !== "all") {
-      fetchTickets();
-    } else {
-      // Handle case when "all" category is selected
-      setTickets([]);
-      setLoading(false);
-    }
+    fetchTickets();
   }, [selectedCategory]);
 
   return (
