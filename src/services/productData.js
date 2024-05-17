@@ -1,4 +1,5 @@
 import { API_URL } from "./constants";
+import axios from "axios";
 
 // export async function getAll(page = 1, category = null, query = '') {
 //   let url = `${API_URL}/tickets?page=${page}`;
@@ -52,31 +53,37 @@ export async function getDataForCategoryByName(name) {
   }
 }
 
-
 export async function getSpecific(id) {
   const response = await fetch(`${API_URL}/tickets/getTicket/${id}`, { credentials: "include" });
   const data = await response.json();
-  console.log('getSpecific data:', data);
+  console.log("getSpecific data:", data);
   return data;
 }
-
 
 export async function getRandomTicket() {
   return (await fetch(`${API_URL}/tickets/random`)).json();
 }
 
-export async function createTicket(product) {
-  return (
-    await fetch(`${API_URL}/tickets/create`, {
+export const createTicket = async (user, ticketData) => {
+  try {
+    const res = await axios.post(`${API_URL}/tickets/createNewTicket/${user._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(product),
-    })
-  ).json();
-}
+      data: ticketData,
+    });
+    if (res.status === 201) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+    return false;
+  }
+};
 
 export async function editTicket(id, product) {
   return (
