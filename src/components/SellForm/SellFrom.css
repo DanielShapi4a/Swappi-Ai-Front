@@ -1,0 +1,70 @@
+/* SellForm.css */
+
+.sell-form-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+  /* Use flexbox to center the form container horizontally */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sell-form-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 40px;
+}
+
+.sell-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  width: 100%; /* Ensures the form takes the full width of the container */
+}
+
+.sell-form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.sell-form-input label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.sell-form-input input,
+.sell-form-input select,
+.sell-form-input textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.sell-form-buttons {
+  grid-column: 1 / -1; /* Make the button span across all columns */
+  display: block;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.sell-form-buttons button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sell-form-buttons button:hover {
+  background-color: #45a049;
+}

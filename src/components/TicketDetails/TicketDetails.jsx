@@ -40,16 +40,15 @@ function TicketDetails() {
           } else {
             setBackGround("other");
           }
+        } else {
+          setBackGround("other");
         }
-      } else {
-        setBackGround("other");
       }
     } catch (error) {
       console.error("Error setting background:", error);
       setBackGround("other");
     }
   };
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,7 +95,7 @@ function TicketDetails() {
             <p className="ticket-details-details" style={{ marginTop: "8rem", fontWeight: "500" }}>
               Seller: {ticket.seller.name}
             </p>
-            <div style={{display:"flex", justifyContent:"space-evenly"}}>
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <button className="ticket-button-add">Add Ticket</button>
               <button className="ticket-button-remove">Remove Ticket</button>
             </div>

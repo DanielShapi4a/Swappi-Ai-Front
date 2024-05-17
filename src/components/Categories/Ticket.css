@@ -7,7 +7,7 @@
 }
 
 .category-image {
-  height: 200px; 
+  height: 200px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -37,6 +37,10 @@
   max-width: 100px;
   align-self: center;
   margin-bottom: 10px;
+  transition: 0.5s;
+}
+.category-button:hover {
+  background-color: #004590;
 }
 
 @media (min-width: 768px) {
