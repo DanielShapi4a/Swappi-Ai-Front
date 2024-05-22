@@ -8,7 +8,7 @@ import { useAuth } from "../contexts/authContext";
 const EditableField = ({ label, value, name, type, onChange }) => (
   <div className="edit-input">
     <label>{label}:</label>
-    <input type={type} name={name} value={value} onChange={onChange} />
+    <input type={type} name={name} value={value} onChange={(e) => onChange(name, e.target.value)} />
   </div>
 );
 
@@ -19,13 +19,22 @@ const EditButtons = ({ onSave, onCancel }) => (
   </div>
 );
 
-const EditForm = ({ user, onSave, onCancel, onChange }) => (
+const EditForm = ({ user, onSave, onCancel, onChange, showPasswordFields, onTogglePasswordEdit }) => (
   <div className="edit-form">
     <EditableField label="Name" value={user.name} name="name" type="text" onChange={onChange} />
     <EditableField label="Gender" value={user.gender} name="gender" type="select" onChange={onChange} />
     <EditableField label="Phone Number" value={user.phoneNumber} name="phoneNumber" type="text" onChange={onChange} />
     <EditableField label="Email" value={user.email} name="email" type="email" onChange={onChange} />
-    <EditableField label="Password" value={user.password} name="password" type="password" onChange={onChange} />
+    {showPasswordFields && (
+      <>
+        <EditableField label="Current Password" value={user.currentPassword || ''} name="currentPassword" type="password" onChange={onChange} />
+        <EditableField label="New Password" value={user.newPassword || ''} name="newPassword" type="password" onChange={onChange} />
+        <EditableField label="Confirm New Password" value={user.confirmNewPassword || ''} name="confirmNewPassword" type="password" onChange={onChange} />
+      </>
+    )}
+    <div>
+      <button className="password-edit-button" onClick={onTogglePasswordEdit}>{showPasswordFields ? 'Hide Password Fields' : 'Edit Password'}</button>
+    </div>
     <EditButtons onSave={onSave} onCancel={onCancel} />
   </div>
 );
@@ -35,13 +44,18 @@ const ProfilePage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState(null);
   const [showAvatarInput, setShowAvatarInput] = useState(false); // State to manage avatar input visibility
+  const [showPasswordFields, setShowPasswordFields] = useState(false);
+  const [passwordFields, setPasswordFields] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
+  });
 
   useEffect(() => {
     setEditedUser(user);
   }, [user]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (name, value) => {
     setEditedUser((prevUser) => ({
       ...prevUser,
       [name]: value,
@@ -50,13 +64,28 @@ const ProfilePage = () => {
 
   const handleSave = async () => {
     try {
-      const response = await editUserProfile(editedUser._id, editedUser);
+      let userDataToSend = { ...editedUser };
+      if (editedUser.newPassword && editedUser.confirmNewPassword) {
+        userDataToSend = {
+          ...userDataToSend,
+          currentPassword: editedUser.currentPassword,
+          newPassword: editedUser.newPassword,
+          confirmNewPassword: editedUser.confirmNewPassword
+        };
+      } else {
+        // If new password and confirm password are empty, send the data with the current password
+        delete userDataToSend.newPassword;
+        delete userDataToSend.confirmNewPassword;
+      }
+      const response = await editUserProfile(editedUser._id, userDataToSend);
       console.log("User profile updated successfully:", response);
     } catch (error) {
       console.error("Error updating user profile:", error);
     }
     setIsEditing(false);
+    setShowPasswordFields(false);
   };
+  
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -67,13 +96,15 @@ const ProfilePage = () => {
     setIsEditing(false);
     setEditedUser({ ...user });
     setShowAvatarInput(false); // Hide avatar input when editing is canceled
+    setShowPasswordFields(false);
+    setPasswordFields({ currentPassword: '', newPassword: '', confirmNewPassword: '' });
   };
 
   const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append('avatar', file);
-  
+
     try {
       const response = await editUserProfile(user._id, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
       console.log("Avatar updated successfully:", response);
@@ -82,6 +113,10 @@ const ProfilePage = () => {
     } catch (error) {
       console.error("Error updating avatar:", error);
     }
+  };
+
+  const handleTogglePasswordEdit = () => {
+    setShowPasswordFields(!showPasswordFields);
   };
 
   return (
@@ -107,7 +142,14 @@ const ProfilePage = () => {
           <h3>User Data</h3>
           {user && editedUser ? (
             isEditing ? (
-              <EditForm user={editedUser} onSave={handleSave} onCancel={handleCancel} onChange={handleChange} />
+              <EditForm
+                user={editedUser}
+                onSave={handleSave}
+                onCancel={handleCancel}
+                onChange={handleChange}
+                showPasswordFields={showPasswordFields}
+                onTogglePasswordEdit={handleTogglePasswordEdit}
+              />
             ) : (
               <div className="data-item">
                 <p>
@@ -122,10 +164,18 @@ const ProfilePage = () => {
                 <p>
                   <strong>Email:</strong> {editedUser.email}
                 </p>
-                <p>
-                  <strong>Password:</strong> *********
-                </p>
-                <button className="edit-button" onClick={handleEdit}>Edit User</button>
+                {showPasswordFields ? (
+                  <p>
+                    <strong>Password:</strong> *********
+                  </p>
+                ) : (
+                  <button className="edit-button" onClick={handleEdit}>Edit User</button>
+                )}
+                {showPasswordFields && (
+                  <div>
+                    <button className="password-edit-button" onClick={handleTogglePasswordEdit}>Hide Password Fields</button>
+                  </div>
+                )}
               </div>
             )
           ) : (
@@ -141,3 +191,4 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
