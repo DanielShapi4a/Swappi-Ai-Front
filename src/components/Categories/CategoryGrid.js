@@ -75,7 +75,7 @@ function CategoryGrid({ selectedCategory }) {
         <div>No tickets found in this category.</div>
       ) : (
         <div className="category-grid">
-          {tickets.map((ticket) => (
+          {tickets.map((index,ticket) => (
             <Ticket
               key={ticket._id}
               id={ticket._id}

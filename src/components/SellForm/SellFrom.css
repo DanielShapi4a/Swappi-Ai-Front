@@ -1,18 +1,17 @@
 /* SellForm.css */
 
 .sell-form-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
   background-color: #f4f4f4;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-
-  /* Use flexbox to center the form container horizontally */
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
 }
 
 .sell-form-header {

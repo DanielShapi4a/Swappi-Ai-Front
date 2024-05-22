@@ -24,8 +24,8 @@ const HamburgerMenu = () => {
           <Link className="menu-item" to={"/"}>Home</Link>
           <Link className="menu-item" to={"/user/"}>Profile</Link>
           <Link className="menu-item" to={"/orders/"}>Orders</Link>
-          <Link className="menu-item" to={"/sells/"}>Sells</Link>
-
+          <Link className="menu-item" to={"/sells/"}>Sell</Link>
+          <Link className="menu-item" to={"/mySellTickets/"}>My Sells</Link>
         </ul>
       </div>
     </div>

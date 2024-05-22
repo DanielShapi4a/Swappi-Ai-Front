@@ -12,8 +12,7 @@ const SellsPage = () => {
       <div className="sells-page">
         <Navbar />
         <h1>Sells Page</h1>
-        <div className="profile-section sells-section">
-          <h3>Current Sells</h3>
+        <div className="profile-section sells-section" >
           {/* Display sells data here */}
           {/* Sell Form */}
           {user ? <SellForm /> : <h3>Please login to view current sells</h3>}

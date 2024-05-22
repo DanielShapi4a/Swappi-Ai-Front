@@ -103,3 +103,12 @@
 .ticket-button-remove:hover{
   background-color: rgb(205, 59, 59);
 }
+
+.ticket-edit-button{
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
