@@ -8,6 +8,7 @@ import { AuthProvider } from "./pages/contexts/authContext.js";
 import SellsPage from "./pages/SellsPage/SellsPage.jsx";
 import OrdersPage from "./pages/OrdersPage/OrdersPage.jsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
+import MySellTickets from "./pages/MySellTickets/MySellTickets.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/user/" element={<ProfilePage />} />
             <Route path="/orders/" element={<OrdersPage />} />
             <Route path="/sells/" element={<SellsPage />} />
+            <Route path="/mySellTickets/" element={<MySellTickets />} />
             {/* Add more routes for other pages as needed */}
           </Routes>
         </Router>

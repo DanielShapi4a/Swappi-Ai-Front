@@ -5,8 +5,10 @@ import { getSpecific } from "../../services/productData";
 import "./TicketDetails.css";
 import Footer from "../Footer";
 import { getCategoryNames } from "../../services/productData";
+import { useAuth } from "../../pages/contexts/authContext";
 
 function TicketDetails() {
+  const { user } = useAuth();
   const { id } = useParams();
   const [ticket, setTicket] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,6 +24,9 @@ function TicketDetails() {
     } catch (error) {
       console.error("Error fetching category names:", error);
     }
+  };
+  const handleEditTicket = () => {
+
   };
   const setBackgroundImage = async () => {
     console.log("Ticket Category:", ticket.category);
@@ -95,10 +100,15 @@ function TicketDetails() {
             <p className="ticket-details-details" style={{ marginTop: "8rem", fontWeight: "500" }}>
               Seller: {ticket.seller.name}
             </p>
+            {/* Add handleEditTicket fucntion */}
+            {user._id === ticket.seller ? 
+            <button className="ticket-edit-button" onClick={()=> handleEditTicket()}>Edit</button>
+             :
             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <button className="ticket-button-add">Add Ticket</button>
               <button className="ticket-button-remove">Remove Ticket</button>
             </div>
+            }
           </div>
         )}
       </div>

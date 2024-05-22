@@ -106,15 +106,16 @@ export async function getUserWishlist() {
 }
 
 export async function editUserProfile(id, data, avatarData) {
+  console.log("data is:", data);
   const formData = new FormData();
   formData.append('userData', JSON.stringify(data));
-  formData.append('avatar', avatarData);
-
-  return await fetch(`${API_URL}/users/updateUser/${id}`, {
-    method: "PUT",
-    credentials: "include",
-    body: formData,
-  }).json();
+  formData.append('avatar', avatarData || "");
+  console.log(formData);
+  return await axios.put(`${API_URL}/users/updateUser/${id}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
 }
 
 

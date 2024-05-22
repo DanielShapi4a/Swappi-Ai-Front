@@ -56,6 +56,7 @@ const SellForm = () => {
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
+            style={{resize:"none"}}
             {...register("description", {
               required: "Description is required.",
               minLength: {
