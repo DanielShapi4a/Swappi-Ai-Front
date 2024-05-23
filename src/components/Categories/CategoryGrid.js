@@ -24,10 +24,8 @@ function CategoryGrid({ selectedCategory }) {
           console.log("Ticket IDs:", ticketIds);
           const ticketPromises = ticketIds.map(async (ticketId) => {
             // Fetch ticket data by ID
-            console.log("Fetching ticket data for ticket ID:", ticketId);
             const response = await fetch(`${API_URL}/tickets/getTicket/${ticketId}`, { credentials: "include" });
             const ticketData = await response.json();
-            console.log("Ticket data:", ticketData);
             return ticketData;
           });
           // Resolve all ticket promises
@@ -43,10 +41,8 @@ function CategoryGrid({ selectedCategory }) {
           console.log("All ticket IDs:", allTicketIds);
           const ticketPromises = allTicketIds.map(async (ticketId) => {
             // Fetch ticket data by ID
-            console.log("Fetching ticket data for ticket ID:", ticketId);
             const response = await fetch(`${API_URL}/tickets/getTicket/${ticketId}`, { credentials: "include" });
             const ticketData = await response.json();
-            console.log("Ticket data:", ticketData);
             return ticketData;
           });
           // Resolve all ticket promises
@@ -75,7 +71,7 @@ function CategoryGrid({ selectedCategory }) {
         <div>No tickets found in this category.</div>
       ) : (
         <div className="category-grid">
-          {tickets.map((index,ticket) => (
+          {tickets.map((ticket, index) => (
             <Ticket
               key={ticket._id}
               id={ticket._id}
