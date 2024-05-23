@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useCallback } from "react";
+import { useParams, Link } from "react-router-dom"; // Replace useHistory with useNavigate
 import Navbar from "../Navigation Bar/Navbar";
 import { getSpecific } from "../../services/productData";
 import "./TicketDetails.css";
@@ -25,10 +25,8 @@ function TicketDetails() {
       console.error("Error fetching category names:", error);
     }
   };
-  const handleEditTicket = () => {
 
-  };
-  const setBackgroundImage = async () => {
+  const setBackgroundImage = useCallback(async () => {
     console.log("Ticket Category:", ticket.category);
     console.log("Category names:", categoryNames);
     try {
@@ -53,7 +51,7 @@ function TicketDetails() {
       console.error("Error setting background:", error);
       setBackGround("other");
     }
-  };
+  }, [ticket, categoryNames]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,7 +70,8 @@ function TicketDetails() {
 
   useEffect(() => {
     if (ticket) setBackgroundImage();
-  }, [ticket, categoryNames]);
+  }, [ticket, categoryNames, setBackgroundImage]);
+
 
   return (
     <div className={`ticket-page ${backGround}`}>
@@ -100,15 +99,16 @@ function TicketDetails() {
             <p className="ticket-details-details" style={{ marginTop: "8rem", fontWeight: "500" }}>
               Seller: {ticket.seller.name}
             </p>
-            {/* Add handleEditTicket fucntion */}
-            {user._id === ticket.seller ? 
-            <button className="ticket-edit-button" onClick={()=> handleEditTicket()}>Edit</button>
-             :
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-              <button className="ticket-button-add">Add Ticket</button>
-              <button className="ticket-button-remove">Remove Ticket</button>
-            </div>
-            }
+            {user._id === ticket.seller ? (
+              <Link className="ticket-edit-button" to="/sells/" state={ticket}>
+              Edit
+              </Link>
+            ) : (
+              <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                <button className="ticket-button-add">Add Ticket</button>
+                <button className="ticket-button-remove">Remove Ticket</button>
+              </div>
+            )}
           </div>
         )}
       </div>

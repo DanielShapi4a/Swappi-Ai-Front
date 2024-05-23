@@ -97,18 +97,27 @@ export const createTicket = async (user, ticketData) => {
   }
 };
 
-export async function editTicket(id, product) {
-  return (
-    await fetch(`${API_URL}/tickets/edit/${id}`, {
-      method: "PATCH",
+export const updateTicket = async (user, ticketId, ticketData) => {
+  ticketData = {...ticketData,"seller":user._id}
+  try {
+    const res = await axios.put(`${API_URL}/tickets/updateTicket/${ticketId}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(product),
-    })
-  ).json();
-}
+      data: ticketData,
+    });
+    if (res.status === 201) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+    return false;
+  }
+};
 
 export async function activateSell(id) {
   return (await fetch(`${API_URL}/tickets/enable/${id}`)).json();
