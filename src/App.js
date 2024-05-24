@@ -9,6 +9,7 @@ import SellsPage from "./pages/SellsPage/SellsPage.jsx";
 import OrdersPage from "./pages/OrdersPage/OrdersPage.jsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 import MySellTickets from "./pages/MySellTickets/MySellTickets.jsx";
+import SearchResultPage from "./pages/SearchResultPage/SearchResultPage.jsx";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/orders/" element={<OrdersPage />} />
             <Route path="/sells/" element={<SellsPage />} />
             <Route path="/mySellTickets/" element={<MySellTickets />} />
+            <Route path="/Search/" element={<SearchResultPage />} />
             {/* Add more routes for other pages as needed */}
           </Routes>
         </Router>

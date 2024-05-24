@@ -1,19 +1,37 @@
 import React, { useState } from 'react';
 import HamburgerMenu from './HamburgerMenu';
 import ProfileArea from './ProfileArea';
+import { searchTicket } from '../../services/productData';
 import '../../CSS/Navbar.css';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ userData }) => {
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [search, setSearch] = useState("");
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
-  const handleSearchChange = (event) => {
-    setSearch(event.target.value);
+  const handleSearchFocus = () => {
+    setSearchFocused(true);
   };
 
-  const handleSearchSubmit = () => {
-    // Perform search action with the current search value
-    console.log("Search value:", search);
+  const handleSearchBlur = () => {
+    setSearchFocused(false);
+  };
+
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleKeyPress = async (event) => {
+    if(event.key === 'Enter'){
+      try{
+        const results = await searchTicket(searchValue);
+        navigate("/search/", {state: {results}});
+        console.log("results are:", results);
+      }catch(error){
+        console.log("Error searching tickets", error);
+      }
+    }
   };
 
   return (
@@ -21,20 +39,16 @@ const Navbar = ({ userData }) => {
       <div className="left-section">
         <HamburgerMenu />
       </div>
-      <div className={`middle-section ${isSearchFocused ? 'focused' : ''}`}>
+      <div className={`middle-section ${searchFocused ? 'focused' : ''}`}>
         <input
-          className={`search-bar ${isSearchFocused ? 'focused' : ''}`}
+          className={`search-bar ${searchFocused ? 'focused' : ''}`}
           type="text"
-          placeholder="Search.."
-          value={search}
-          onFocus={() => setIsSearchFocused(true)}
-          onBlur={() => setIsSearchFocused(false)}
-          onChange={handleSearchChange}
-          onKeyPress={(event) => {
-            if (event.key === 'Enter') {
-              handleSearchSubmit();
-            }
-          }}
+          placeholder="Search..."
+          onFocus={handleSearchFocus}
+          onBlur={handleSearchBlur}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
+          value={searchValue}
         />
       </div>
       <div className="right-section">

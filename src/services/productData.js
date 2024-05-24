@@ -119,6 +119,18 @@ export const updateTicket = async (user, ticketId, ticketData) => {
   }
 };
 
+export const searchTicket = async (searchString) => {
+  try{
+    const response = await axios.get(`${API_URL}/tickets/search/`, {
+      params: { q: searchString }
+    });
+    return response.data;
+  } catch(error){
+    console.log(error.response.data);
+    return ;
+  }
+};
+
 export async function activateSell(id) {
   return (await fetch(`${API_URL}/tickets/enable/${id}`)).json();
 }
