@@ -79,29 +79,26 @@
 
 .ticket-button-add, .ticket-button-remove {
   padding: 2em; 
-  color: black;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: white;
   font-weight: bold;
   border: none;
   cursor: pointer;
   border-radius: 1.5rem;
   margin-top: 2rem; 
   transition: 0.5s;
-  opacity: 1;
-  font-size: 0.8rem;
 }
 
 .ticket-button-add:hover{
-  background-color: #55ca57;
-}
-.ticket-button-add{
   background-color: #4caf50;
 }
+.ticket-button-add{
+  background-color: #55ca57;
+}
 .ticket-button-remove{
-  background-color: rgb(166, 57, 57);
+  background-color: rgb(205, 59, 59);
 }
 .ticket-button-remove:hover{
-  background-color: rgb(205, 59, 59);
+  background-color: rgb(166, 57, 57);
 }
 
 .ticket-edit-button{
@@ -112,4 +109,9 @@
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
+  transition: 0.5s;
+}
+
+.ticket-edit-button:hover{
+  background-color: #004590;
 }

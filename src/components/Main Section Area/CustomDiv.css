@@ -83,6 +83,10 @@
   right: 1em; 
   border-radius: 1.5em;
   margin-top: 2em; 
+  transition: 0.5s;
+}
+.chat-button:hover{
+  background-color: #004590;
 }
 
 .chat-popup {
