@@ -1,8 +1,9 @@
-import "./SellFrom.css";
+import "./SellForm.css";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../pages/contexts/authContext.js";
 import { createTicket, updateTicket, getCategoryNames } from "../../services/productData.js";
+import { useNavigate } from 'react-router-dom';
 
 // SellForm Component: This component is responsible for rendering a form to create or edit a ticket for selling.
 
@@ -19,6 +20,7 @@ import { createTicket, updateTicket, getCategoryNames } from "../../services/pro
 
 const SellForm = ({ data }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [submitRes, setSubmitRes] = useState("");
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [categories, setCategories] = useState([]);
@@ -33,17 +35,17 @@ const SellForm = ({ data }) => {
       setValue("location", data.location || "");
       setValue("eventDateTime", data.eventDateTime ? new Date(data.eventDateTime).toISOString().slice(0, 16) : "");
     }
-  }, [data, setValue, categories]);
+  }, [data, setValue]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchCategories();
-  },[])
+  }, []);
 
   const fetchCategories = async () => {
-    try{
+    try {
       const categoryData = await getCategoryNames();
       setCategories(categoryData);
-    } catch (error){
+    } catch (error) {
       console.error("Error fetching categories", error);
     }
   };
@@ -57,6 +59,12 @@ const SellForm = ({ data }) => {
     }
     setSubmitRes(res);
     console.log("Response Console Log", res);
+    
+    if (res === true) {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
   };
 
   return (
@@ -89,13 +97,13 @@ const SellForm = ({ data }) => {
             {...register("category", {
               required: "Category is required.",
             })}
-            defaultValue={data ? data.category :""}
-            >
-              <option value={""}>Select a category...</option>
-              {categories.map((category, index) => 
-                <option key={index} value={category.category_Name}>
-                  {category.category_Name}
-                </option>
+            defaultValue={data ? data.category : ""}
+          >
+            <option value={""}>Select a category...</option>
+            {categories.map((category, index) => 
+              <option key={index} value={category.category_Name}>
+                {category.category_Name}
+              </option>
             )}
           </select>
           {errors.category && <p>{errors.category.message}</p>}
