@@ -34,7 +34,6 @@ const ProfileArea = () => {
         src={user ? user.avatar || defaultProfileImage : defaultProfileImage}
         alt="User Avatar"
         size="48px"
-        marginRight="10px"
       />
       <>
         {user ? (

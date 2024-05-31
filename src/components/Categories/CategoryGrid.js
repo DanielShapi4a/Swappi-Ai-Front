@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API_URL } from '../../services/constants.js';
 import Ticket from './Ticket.js';
-import { getSpecific } from '../../services/productData'; // Import the function to fetch specific ticket data
 import './Ticket.css';
 import './CategoryGrid.css';
 import { getDataForCategoryByName, HandleGetAllTickets } from '../../services/productData';
@@ -16,12 +15,9 @@ function CategoryGrid({ selectedCategory }) {
       try {
         setLoading(true);
         if (selectedCategory !== "all") {
-          console.log("Fetching tickets for category:", selectedCategory);
           // Fetch category data by name
           const categoryData = await getDataForCategoryByName(selectedCategory);
-          console.log("Category data:", categoryData);
           const ticketIds = categoryData.ticketIds;
-          console.log("Ticket IDs:", ticketIds);
           const ticketPromises = ticketIds.map(async (ticketId) => {
             // Fetch ticket data by ID
             const response = await fetch(`${API_URL}/tickets/getTicket/${ticketId}`, { credentials: "include" });
@@ -30,15 +26,12 @@ function CategoryGrid({ selectedCategory }) {
           });
           // Resolve all ticket promises
           const ticketResults = await Promise.all(ticketPromises);
-          console.log("Resolved ticket results:", ticketResults);
           setTickets(ticketResults);
           setLoading(false);
         } else {
           // Handle case when "all" category is selected
           const allTicketsData = await HandleGetAllTickets();
           const allTicketIds = allTicketsData.ticketIds;
-          console.log("All tickets data:", allTicketsData);
-          console.log("All ticket IDs:", allTicketIds);
           const ticketPromises = allTicketIds.map(async (ticketId) => {
             // Fetch ticket data by ID
             const response = await fetch(`${API_URL}/tickets/getTicket/${ticketId}`, { credentials: "include" });
@@ -47,7 +40,6 @@ function CategoryGrid({ selectedCategory }) {
           });
           // Resolve all ticket promises
           const ticketResults = await Promise.all(ticketPromises);
-          console.log("Resolved ticket results:", ticketResults);
           setTickets(ticketResults);
           setLoading(false);
         }

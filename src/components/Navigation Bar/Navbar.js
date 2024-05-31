@@ -25,9 +25,12 @@ const Navbar = ({ userData }) => {
   const handleKeyPress = async (event) => {
     if(event.key === 'Enter'){
       try{
-        const results = await searchTicket(searchValue);
-        navigate("/search/", {state: {results}});
-        console.log("results are:", results);
+        if(searchValue) {
+          const results = await searchTicket(searchValue);
+          if (results && results.length > 0) {
+          navigate("/search/", {state: {results}});
+          }
+        }
       }catch(error){
         console.log("Error searching tickets", error);
       }

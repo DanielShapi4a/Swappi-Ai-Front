@@ -13,7 +13,6 @@ const CurrentUserSells = () => {
         const fetchUserTickets = async () => {
             try{
                 const tickets = await getAllTicketsByUserID(user._id);
-                console.log(tickets);
                 setUsersTickets(tickets);
             }
             catch(error){

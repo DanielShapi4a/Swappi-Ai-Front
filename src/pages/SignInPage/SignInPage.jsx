@@ -4,9 +4,13 @@ import { registerUser } from "../../services/userData.js";
 import { useNavigate } from "react-router-dom";
 import "./SignInPage.css";
 
+// The code in SignInPage.jsx defines a React component for a sign-in page.
+// Users can input their email, username, password, confirm password, and phone number.
+// It includes error handling for password mismatch and unexpected errors during sign-in.
+// Upon successful sign-in, users are redirected to the home page.
+
 const SignInPage = ({ setUserData }) => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,10 +34,11 @@ const SignInPage = ({ setUserData }) => {
       };
 
       const result = await registerUser(userData);
-      console.log("BACK-END RESULTS", result);
       // Check if sign-in was successful
-      if (result.user !== undefined) {
-        navigate("/");
+      if (result.status === 201) {
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       } else {
         // Handle sign-in error
         setSignInError(result.message || "Sign-in failed");

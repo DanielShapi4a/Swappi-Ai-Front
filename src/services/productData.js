@@ -1,29 +1,11 @@
 import { API_URL } from "./constants";
 import axios from "axios";
 
-// export async function getAll(page = 1, category = null, query = '') {
-//   let url = `${API_URL}/tickets?page=${page}`;
-
-//   if (query) {
-//     url += `&search=${query}`;
-//   } else if (category && category !== 'all') {
-//     url = `${API_URL}/tickets/${category}?page=${page}`;
-//   }
-
-//   try {
-//     const response = await fetch(url, { credentials: 'include' });
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//     throw error;
-//   }
-// }
+// fucntion to get gell all the available tickets from the DB
 export async function HandleGetAllTickets() {
   try {
     const response = await fetch(`${API_URL}/tickets/`, { credentials: "include" });
     const data = await response.json();
-    console.log("all ids fetched:", data);
     return data;
   } catch (error) {
     console.error("Error fetching all tickets:", error);
@@ -31,6 +13,7 @@ export async function HandleGetAllTickets() {
   }
 }
 
+// function to get the current available categories
 export async function getCategoryNames() {
   try {
     const response = await fetch(`${API_URL}/categories/getAllCategories`, { credentials: "include" });
@@ -42,6 +25,7 @@ export async function getCategoryNames() {
   }
 }
 
+// fucntion to get the tickets for the category selected
 export async function getDataForCategoryByName(name) {
   try {
     const response = await fetch(`${API_URL}/tickets/ticketsByCategory/${name}`, { credentials: "include" });
@@ -53,11 +37,11 @@ export async function getDataForCategoryByName(name) {
   }
 }
 
+// fucntion to get all the users ticket via his id
 export async function getAllTicketsByUserID(id) {
   try {
     const response = await axios.get(`${API_URL}/tickets/getTicketsByUser/${id}`, { credentials: "include" });
     const data = response.data;
-    console.log("all ids fetched:", data);
     return data;
   } catch (error) {
     console.error("Error fetching all tickets by userId:", error);
@@ -65,17 +49,14 @@ export async function getAllTicketsByUserID(id) {
   }
 }
 
+// fucntion to get a spesific ticket via its id
 export async function getSpecific(id) {
   const response = await fetch(`${API_URL}/tickets/getTicket/${id}`, { credentials: "include" });
   const data = await response.json();
-  console.log("getSpecific data:", data);
   return data;
 }
 
-export async function getRandomTicket() {
-  return (await fetch(`${API_URL}/tickets/random`)).json();
-}
-
+// funciton to create a ticket with its data via user ID
 export const createTicket = async (user, ticketData) => {
   try {
     const res = await axios.post(`${API_URL}/tickets/createNewTicket/${user._id}`, {
@@ -97,6 +78,7 @@ export const createTicket = async (user, ticketData) => {
   }
 };
 
+// function to update the tickets data via tickets ID
 export const updateTicket = async (user, ticketId, ticketData) => {
   ticketData = {...ticketData,"seller":user._id}
   try {
@@ -119,6 +101,7 @@ export const updateTicket = async (user, ticketId, ticketData) => {
   }
 };
 
+// function to search for users input in the navbar
 export const searchTicket = async (searchString) => {
   try{
     const response = await axios.get(`${API_URL}/tickets/search/`, {
@@ -131,14 +114,11 @@ export const searchTicket = async (searchString) => {
   }
 };
 
-export async function activateSell(id) {
-  return (await fetch(`${API_URL}/tickets/enable/${id}`)).json();
-}
 
-export async function archiveSell(id) {
-  return (await fetch(`${API_URL}/tickets/archive/${id}`)).json();
-}
+// export async function activateSell(id) {
+//   return (await fetch(`${API_URL}/tickets/enable/${id}`)).json();
+// }
 
-export async function wishTicket(id) {
-  return (await fetch(`${API_URL}/tickets/wish/${id}`, { credentials: "include" })).json();
-}
+// export async function wishTicket(id) {
+//   return (await fetch(`${API_URL}/tickets/wish/${id}`, { credentials: "include" })).json();
+// }

@@ -1,14 +1,10 @@
-// userData.js
-
 import { API_URL } from "./constants";
 import axios from "axios";
 
-// userData.js
+// function to handle the registration of a user
 export async function registerUser(userData) {
-  console.log("======START OF REGISTER USER FUNCTION======");
-  console.log(JSON.stringify(userData));
   try {
-    const response = await fetch(`${API_URL}/auth/updateUser`, {
+    const response = await fetch(`${API_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,8 +13,7 @@ export async function registerUser(userData) {
       body: JSON.stringify(userData),
     });
 
-    const result = await response.json();
-    console.log("Signe-IN response:", result);
+    const result = await response;
     if (response.ok) {
       return result;
     }
@@ -27,7 +22,7 @@ export async function registerUser(userData) {
     return { success: false, message: "Unexpected error during sign-in" };
   }
 }
-
+// funciton to handle the login of a user
 export async function loginUser(email, password) {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
@@ -65,7 +60,7 @@ export async function loginUser(email, password) {
   }
 }
 
-
+// function to handle automatic user login upon entering credentials for the first time
 export async function getUser() {
   try {
     const response = await fetch(`${API_URL}/auth/getuserdatabytoken`, { credentials: "include" });
@@ -89,28 +84,28 @@ export async function getUser() {
   }
 }
 
-export async function getUserActiveSells(id) {
-  return fetch(`${API_URL}/products/sells/active/${id}`, { credentials: "include" }).then((response) =>
-    response.json()
-  );
-}
+// export async function getUserActiveSells(id) {
+//   return fetch(`${API_URL}/products/sells/active/${id}`, { credentials: "include" }).then((response) =>
+//     response.json()
+//   );
+// }
 
-export async function getUserArchivedSells() {
-  return fetch(`${API_URL}/products/sells/archived`, { credentials: "include" }).then((response) => response.json());
-}
+// export async function getUserArchivedSells() {
+//   return fetch(`${API_URL}/products/sells/archived`, { credentials: "include" }).then((response) => response.json());
+// }
 
-export async function getUserWishlist() {
-  return fetch(`${API_URL}/products/wishlist/getWishlist`, { credentials: "include" }).then((response) =>
-    response.json()
-  );
-}
+// export async function getUserWishlist() {
+//   return fetch(`${API_URL}/products/wishlist/getWishlist`, { credentials: "include" }).then((response) =>
+//     response.json()
+//   );
+// }
 
+
+// funciton to edit the users data based on users input
 export async function editUserProfile(id, data, avatarData) {
-  console.log("data is:", data);
   const formData = new FormData();
   formData.append('userData', JSON.stringify(data));
   formData.append('avatar', avatarData || "");
-  console.log(formData);
   return await axios.put(`${API_URL}/users/updateUser/${id}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -118,20 +113,7 @@ export async function editUserProfile(id, data, avatarData) {
   });
 }
 
-
-export async function getUserById(id) {
-  try {
-    const response = await fetch(`${API_URL}/user/getUserById/${id}`, { credentials: "include" });
-    if (!response.ok) {
-      throw new Error("Failed to fetch user");
-    }
-    const data = await response.json();
-    return data.user;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to fetch user");
-  }
-}
+// function to logout the user 
 export async function logoutUser() {
-  const response = await axios.get(`${API_URL}/auth/logout`, { withCredentials: true });
+  await axios.get(`${API_URL}/auth/logout`, { withCredentials: true });
 }

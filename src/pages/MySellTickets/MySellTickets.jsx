@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navigation Bar/Navbar";
 import { useAuth } from "../../pages/contexts/authContext.js";

@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     getLoggedIn();
-  }, []);
+  }, [user]);
 
   return <AuthContext.Provider value={{ user, setUser: setUserState }}>{children}</AuthContext.Provider>;
 };

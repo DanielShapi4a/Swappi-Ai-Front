@@ -12,7 +12,6 @@ function HotOffer({ onCategoryChange }) {
       try {
         const data = await getCategoryNames();
         const names = data.map((category) => category.category_Name);
-        console.log("Names got from getCategoryNames:", names);
         setCategoryNames(names);
       } catch (error) {
         console.error("Error fetching category names:", error);
@@ -43,7 +42,7 @@ function HotOffer({ onCategoryChange }) {
         Hot Offers
       </div>
       <div className="Last-offers" color="grey" style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ fontWeight: "bold", fontSize: "20px", fontSize: "1.5rem" }}>Last offers of the week</div>
+        <div style={{ fontWeight: "bold", fontSize: "1.5rem" }}>Last offers of the week</div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <span style={{ fontWeight: "500", color: "grey", maxWidth: "80%", fontSize: "1.75rem" }}>
             Explore our best offers!

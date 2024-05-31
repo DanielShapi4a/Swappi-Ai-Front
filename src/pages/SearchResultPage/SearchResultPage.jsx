@@ -9,32 +9,30 @@ const SearchResultPage = () => {
     const location = useLocation();
     const {results} = location.state || {results: []};
 
-    useEffect(()=>{
-        console.log("results are:", results);
-    },[results])
-
   return (
     <div>
         <Navbar />
-        <h1>Search Results</h1>
-        <div className="result-container">
-                {results.length > 0 ? (
-                    results.map((ticket, index) => (
-                        <Ticket
-                            key={ticket._id}
-                            id={ticket._id}
-                            title={ticket.title}
-                            description={ticket.description}
-                            image={ticket.image}
-                            price={ticket.price}
-                            
-                        />
-                    ))
-                ) : (
-                    <h5>No results found</h5>
-                )}
+            <div className='search-page'>
+                <h1>Search Results</h1>
+                <div className="result-container">
+                    {results.length > 0 ? (
+                        results.map((ticket, index) => (
+                            <Ticket
+                                key={ticket._id}
+                                id={ticket._id}
+                                title={ticket.title}
+                                description={ticket.description}
+                                image={ticket.image}
+                                price={ticket.price}
+                                
+                            />
+                        ))
+                    ) : (
+                        <h1>No results found</h1>
+                    )}
+                </div>
+                <Footer />
             </div>
-        <Footer />
     </div>
   );
 };
