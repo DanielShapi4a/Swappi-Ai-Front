@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navigation Bar/Navbar";
 import SellForm from "../../components/SellForm/SellForm";
 import { useAuth } from "../../pages/contexts/authContext.js";
 import { useLocation } from "react-router-dom";
 import "./SellsPage.css";
+
+// representing the sells page encapsulating the SellForm component.
 
 const SellsPage = () => {
   const { user } = useAuth();

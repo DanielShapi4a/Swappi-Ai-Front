@@ -5,6 +5,11 @@ import Navbar from "../../components/Navigation Bar/Navbar.js";
 import Footer from "../../components/Footer.js";
 import "./OrdersPage.css";
 
+// OrdersPage Component: This component fetches and displays wished products. (The functionallity isnt available yet!)
+// It utilizes pagination to load more products as the user scrolls down. 
+// If there are no more products to load or if an error occurs during data fetching, appropriate messages are displayed.
+
+
 function OrdersPage() {
   const [wishedProducts, setWishedProducts] = useState([]);
   const [loading, setLoading] = useState(true);

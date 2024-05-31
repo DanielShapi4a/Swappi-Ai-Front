@@ -6,6 +6,11 @@ import Footer from "../../components/Footer";
 import { useAuth } from "../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
+// ProfilePage Component: This component renders the user's profile data and provides options to edit the profile information,
+// including the name, gender, phone number, email, and password. Users can also change their avatar image. 
+// The site renders dynamicly apon selected the edit option, meaning we render different componenets dipending on the users selection.
+
+
 const EditableField = ({ label, value, name, type, onChange }) => (
   <div className="edit-input">
     <label>{label}:</label>
@@ -96,6 +101,7 @@ const ProfilePage = () => {
   };
 
   const handleAvatarChange = async (e) => {
+    // using a FormData to manage the data we move with the file to change the avatar icon, however this isnt implemented yet.
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append('avatar', file);
