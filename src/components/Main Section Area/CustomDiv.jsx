@@ -9,7 +9,7 @@ import image4 from '../../assets/images/MainContentPic4.jpg';
 
 const CustomDiv = () => {
   const [isChatVisible, setChatVisible] = useState(false);
-  const [backgroundImages, setBackgroundImages] = useState([image1, image2, image3, image4]);
+  const backgroundImages = [image1, image2, image3, image4];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
 
@@ -24,7 +24,7 @@ const CustomDiv = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [backgroundImages]);
+  });
 
   const backgroundImageStyle = {
     backgroundImage: `url(${backgroundImages[currentImageIndex]})`,

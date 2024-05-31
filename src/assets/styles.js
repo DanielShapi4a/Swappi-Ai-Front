@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import images from './images.js'; 
-
 
 export const StyledButton = styled.button`
   background-color: #FDA77F;
@@ -16,7 +14,7 @@ export const Avatar = styled.img`
   width: ${(props) => props.size || '32px'};
   height: ${(props) => props.size || '32px'};
   border-radius: 50%;
-  margin-right: ${(props) => props.marginRight || '5px'};
+ 
 `;
 
 export const MainContent = styled.div`

@@ -45,11 +45,6 @@ const ProfilePage = () => {
   const [editedUser, setEditedUser] = useState(null);
   const [showAvatarInput, setShowAvatarInput] = useState(false); // State to manage avatar input visibility
   const [showPasswordFields, setShowPasswordFields] = useState(false);
-  const [passwordFields, setPasswordFields] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmNewPassword: ''
-  });
 
   useEffect(() => {
     setEditedUser(user);
@@ -77,8 +72,7 @@ const ProfilePage = () => {
         delete userDataToSend.newPassword;
         delete userDataToSend.confirmNewPassword;
       }
-      const response = await editUserProfile(editedUser._id, userDataToSend);
-      console.log("User profile updated successfully:", response);
+      await editUserProfile(editedUser._id, userDataToSend);
     } catch (error) {
       console.error("Error updating user profile:", error);
     }
@@ -97,7 +91,6 @@ const ProfilePage = () => {
     setEditedUser({ ...user });
     setShowAvatarInput(false); // Hide avatar input when editing is canceled
     setShowPasswordFields(false);
-    setPasswordFields({ currentPassword: '', newPassword: '', confirmNewPassword: '' });
   };
 
   const handleAvatarChange = async (e) => {
@@ -107,7 +100,6 @@ const ProfilePage = () => {
 
     try {
       const response = await editUserProfile(user._id, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-      console.log("Avatar updated successfully:", response);
       setUser({ ...user, avatar: response.data.avatar });
       setEditedUser({ ...editedUser, avatar: response.data.avatar });
     } catch (error) {

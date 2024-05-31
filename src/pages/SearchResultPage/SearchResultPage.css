@@ -1,7 +1,8 @@
 .search-page{
-    height: 100vh;
+    height: 100%;
     width: 100%;
-    
+    display: grid;
+    grid-template-rows: auto minmax(1fr,auto) auto;
 }
 .result-container{
     display: grid;

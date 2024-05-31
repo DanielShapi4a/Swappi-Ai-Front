@@ -20,19 +20,15 @@ function TicketDetails() {
     try {
       const names = await getCategoryNames();
       setCategoryNames(names);
-      console.log("Category names:", names);
     } catch (error) {
       console.error("Error fetching category names:", error);
     }
   };
 
   const setBackgroundImage = useCallback(async () => {
-    console.log("Ticket Category:", ticket.category);
-    console.log("Category names:", categoryNames);
     try {
       if (ticket && categoryNames.length > 0) {
         const foundCategory = categoryNames.some((category) => category.category_Name === ticket.category);
-        console.log("Found category:", foundCategory);
         if (foundCategory) {
           if (ticket.category === "Concert") {
             setBackGround("concert");

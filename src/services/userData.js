@@ -1,14 +1,10 @@
-// userData.js
-
 import { API_URL } from "./constants";
 import axios from "axios";
 
 // userData.js
 export async function registerUser(userData) {
-  console.log("======START OF REGISTER USER FUNCTION======");
-  console.log(JSON.stringify(userData));
   try {
-    const response = await fetch(`${API_URL}/auth/updateUser`, {
+    const response = await fetch(`${API_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,8 +13,7 @@ export async function registerUser(userData) {
       body: JSON.stringify(userData),
     });
 
-    const result = await response.json();
-    console.log("Signe-IN response:", result);
+    const result = await response;
     if (response.ok) {
       return result;
     }
@@ -106,11 +101,9 @@ export async function getUserWishlist() {
 }
 
 export async function editUserProfile(id, data, avatarData) {
-  console.log("data is:", data);
   const formData = new FormData();
   formData.append('userData', JSON.stringify(data));
   formData.append('avatar', avatarData || "");
-  console.log(formData);
   return await axios.put(`${API_URL}/users/updateUser/${id}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -133,5 +126,5 @@ export async function getUserById(id) {
   }
 }
 export async function logoutUser() {
-  const response = await axios.get(`${API_URL}/auth/logout`, { withCredentials: true });
+  await axios.get(`${API_URL}/auth/logout`, { withCredentials: true });
 }

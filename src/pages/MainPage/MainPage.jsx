@@ -12,14 +12,11 @@ import { useAuth } from "../../pages/contexts/authContext.js";
 function MainPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [loadingData, setLoadingData] = useState(false);
-  const [products, setProducts] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = debounce(() => {
-      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 100 && hasMore && !loadingData) {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 100 ) {
         setCurrentPage((prevPage) => prevPage + 1);
       }
     }, 200);
@@ -28,7 +25,7 @@ function MainPage() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [currentPage, hasMore, loadingData, products, selectedCategory]);
+  }, [currentPage, selectedCategory]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);

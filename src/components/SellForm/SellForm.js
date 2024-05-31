@@ -27,7 +27,6 @@ const SellForm = ({ data }) => {
 
   useEffect(() => {
     if (data.title) {
-      console.log("we got some data:#", data);
       setValue("title", data.title || "");
       setValue("category", data.category || "");
       setValue("description", data.description || "");
@@ -57,9 +56,7 @@ const SellForm = ({ data }) => {
     } else {
       res = await createTicket(user, formData);
     }
-    setSubmitRes(res);
-    console.log("Response Console Log", res);
-    
+    setSubmitRes(res);    
     if (res === true) {
       setTimeout(() => {
         navigate("/");

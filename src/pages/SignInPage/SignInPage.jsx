@@ -30,10 +30,11 @@ const SignInPage = ({ setUserData }) => {
       };
 
       const result = await registerUser(userData);
-      console.log("BACK-END RESULTS", result);
       // Check if sign-in was successful
-      if (result.user !== undefined) {
-        navigate("/");
+      if (result.status === 201) {
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       } else {
         // Handle sign-in error
         setSignInError(result.message || "Sign-in failed");

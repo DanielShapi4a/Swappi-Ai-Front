@@ -23,7 +23,6 @@ export async function HandleGetAllTickets() {
   try {
     const response = await fetch(`${API_URL}/tickets/`, { credentials: "include" });
     const data = await response.json();
-    console.log("all ids fetched:", data);
     return data;
   } catch (error) {
     console.error("Error fetching all tickets:", error);
@@ -57,7 +56,6 @@ export async function getAllTicketsByUserID(id) {
   try {
     const response = await axios.get(`${API_URL}/tickets/getTicketsByUser/${id}`, { credentials: "include" });
     const data = response.data;
-    console.log("all ids fetched:", data);
     return data;
   } catch (error) {
     console.error("Error fetching all tickets by userId:", error);
@@ -68,7 +66,6 @@ export async function getAllTicketsByUserID(id) {
 export async function getSpecific(id) {
   const response = await fetch(`${API_URL}/tickets/getTicket/${id}`, { credentials: "include" });
   const data = await response.json();
-  console.log("getSpecific data:", data);
   return data;
 }
 
