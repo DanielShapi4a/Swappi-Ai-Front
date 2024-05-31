@@ -31,7 +31,6 @@ const LoginModal = ({ onClose }) => {
 
     try {
       const result = await loginUser(email, password, setUser);
-      console.log(result);
       if (result.success) {
         const userData = result.user;
         onClose(userData); // Pass user data to the callback function

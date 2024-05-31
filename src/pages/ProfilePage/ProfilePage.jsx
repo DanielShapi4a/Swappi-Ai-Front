@@ -4,6 +4,7 @@ import { editUserProfile } from "../../services/userData";
 import Navbar from "../../components/Navigation Bar/Navbar";
 import Footer from "../../components/Footer";
 import { useAuth } from "../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 const EditableField = ({ label, value, name, type, onChange }) => (
   <div className="edit-input">
@@ -40,6 +41,7 @@ const EditForm = ({ user, onSave, onCancel, onChange, showPasswordFields, onTogg
 );
 
 const ProfilePage = () => {
+  const navigate =  useNavigate();
   const { user, setUser } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState(null);
@@ -114,6 +116,7 @@ const ProfilePage = () => {
   return (
     <div>
       <Navbar />
+      {user ? <> 
       <div className="profile-container">
         <div className="profile-header">
           {user && editedUser && (
@@ -177,6 +180,7 @@ const ProfilePage = () => {
           )}
         </div>
       </div>
+      </> : navigate("/")}
       <Footer />
     </div>
   );
