@@ -49,6 +49,7 @@ export async function getAllTicketsByUserID(id) {
   }
 }
 
+
 // fucntion to get a spesific ticket via its id
 export async function getSpecific(id) {
   const response = await fetch(`${API_URL}/tickets/getTicket/${id}`, { credentials: "include" });
@@ -113,6 +114,23 @@ export const searchTicket = async (searchString) => {
     return ;
   }
 };
+
+// function to make a transaction between a ticket and a user
+export const buyTicket = async (userId, ticketId) => {
+  try{
+    const res = await axios.put(`${API_URL}/tickets/buyTicket/${ticketId}`, {userId} ,{
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredential: true,
+    });
+    console.log("response is:",res);
+
+  } catch(error){
+    console.log("Error while buying ticket", error);
+  }
+}
 
 
 // export async function activateSell(id) {

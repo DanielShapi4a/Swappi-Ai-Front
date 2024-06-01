@@ -26,7 +26,8 @@ function CategoryGrid({ selectedCategory }) {
           });
           // Resolve all ticket promises
           const ticketResults = await Promise.all(ticketPromises);
-          setTickets(ticketResults);
+          const activeTickets = ticketResults.filter((ticket,index)=> ticket.active);
+          setTickets(activeTickets);
           setLoading(false);
         } else {
           // Handle case when "all" category is selected
@@ -40,7 +41,8 @@ function CategoryGrid({ selectedCategory }) {
           });
           // Resolve all ticket promises
           const ticketResults = await Promise.all(ticketPromises);
-          setTickets(ticketResults);
+          const activeTickets = ticketResults.filter((ticket,index)=> ticket.active);
+          setTickets(activeTickets);
           setLoading(false);
         }
       } catch (error) {

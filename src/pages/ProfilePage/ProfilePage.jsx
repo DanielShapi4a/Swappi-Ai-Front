@@ -52,10 +52,19 @@ const ProfilePage = () => {
   const [editedUser, setEditedUser] = useState(null);
   const [showAvatarInput, setShowAvatarInput] = useState(false); // State to manage avatar input visibility
   const [showPasswordFields, setShowPasswordFields] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const setUserData = async () => {
+      await setEditedUser(user);
+      console.log("hi");
+    };
+
+    setUserData();
     setEditedUser(user);
-  }, [user]);
+    setIsLoading(true);
+  }, [isLoading]);
+
 
   const handleChange = (name, value) => {
     setEditedUser((prevUser) => ({
@@ -79,18 +88,21 @@ const ProfilePage = () => {
         delete userDataToSend.newPassword;
         delete userDataToSend.confirmNewPassword;
       }
+      console.log(userDataToSend);
       await editUserProfile(editedUser._id, userDataToSend);
     } catch (error) {
       console.error("Error updating user profile:", error);
     }
     setIsEditing(false);
     setShowPasswordFields(false);
+    setIsLoading(true);
   };
   
 
   const handleEdit = () => {
     setIsEditing(true);
     setShowAvatarInput(true); // Show avatar input when editing starts
+    setIsLoading(false);
   };
 
   const handleCancel = () => {
@@ -98,6 +110,7 @@ const ProfilePage = () => {
     setEditedUser({ ...user });
     setShowAvatarInput(false); // Hide avatar input when editing is canceled
     setShowPasswordFields(false);
+    setIsEditing(false);
   };
 
   const handleAvatarChange = async (e) => {
@@ -122,10 +135,10 @@ const ProfilePage = () => {
   return (
     <div>
       <Navbar />
-      {user ? <> 
+      { editedUser ?  <> 
       <div className="profile-container">
         <div className="profile-header">
-          {user && editedUser && (
+          { editedUser && (
             <div className="avatar-section">
               {/* Avatar display and change option */}
               <img src={editedUser.avatar} alt="Avatar" className="avatar-image" />
