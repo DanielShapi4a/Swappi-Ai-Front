@@ -77,7 +77,7 @@
 }
 
 
-.ticket-button-add, .ticket-button-remove {
+.ticket-button-buy, .ticket-button-remove {
   padding: 2em; 
   color: white;
   font-weight: bold;
@@ -88,10 +88,10 @@
   transition: 0.5s;
 }
 
-.ticket-button-add:hover{
+.ticket-button-buy:hover{
   background-color: #4caf50;
 }
-.ticket-button-add{
+.ticket-button-buy{
   background-color: #55ca57;
 }
 .ticket-button-remove{

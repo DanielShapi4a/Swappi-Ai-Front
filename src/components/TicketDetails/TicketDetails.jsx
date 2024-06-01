@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom"; // Replace useHistory with useNavigate
 import Navbar from "../Navigation Bar/Navbar";
-import { getSpecific } from "../../services/productData";
 import "./TicketDetails.css";
 import Footer from "../Footer";
-import { getCategoryNames } from "../../services/productData";
+import { getCategoryNames, buyTicket, getSpecific } from "../../services/productData";
 import { useAuth } from "../../pages/contexts/authContext";
 
 function TicketDetails() {
@@ -22,6 +21,15 @@ function TicketDetails() {
       setCategoryNames(names);
     } catch (error) {
       console.error("Error fetching category names:", error);
+    }
+  };
+
+   const handleBuyTicket = async () => {
+    try{
+      await buyTicket(user._id, ticket._id);
+      window.location.reload();
+    } catch(error){
+        console.log("error buying ticket", error);
     }
   };
 
@@ -88,7 +96,7 @@ function TicketDetails() {
             <p className="ticket-details-description">{ticket.description}</p>
             <div className="ticket-info-container">
               <p className="ticket-details-price">Price: {ticket.price}₪</p>
-              <p className="ticket-details-details">City: {ticket.city}</p>
+              <p className="ticket-details-details">Location: {ticket.location}</p>
               <p className="ticket-details-details">Category: {ticket.category}</p>
               {/* Add more details as needed */}
             </div>
@@ -101,8 +109,7 @@ function TicketDetails() {
               </Link>
             ) : (
               <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-                <button className="ticket-button-add">Add Ticket</button>
-                <button className="ticket-button-remove">Remove Ticket</button>
+                <button className="ticket-button-buy" onClick={()=>handleBuyTicket()}>Buy Ticket</button>
               </div>
             )}
           </div>

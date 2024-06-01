@@ -1,10 +1,10 @@
-import "./CurrentUserSells.css";
+import "./CurrentUserOrders.css";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../pages/contexts/authContext.js";
 import { getAllTicketsByUserID } from "../../services/productData.js";
 import Ticket from "../Categories/Ticket.js";
 
-const CurrentUserSells = () => {
+const CurrentUserOrders = () => {
 
     const {user} = useAuth();
     const [usersTickets, setUsersTickets] = useState([]);
@@ -13,7 +13,7 @@ const CurrentUserSells = () => {
         const fetchUserTickets = async () => {
             try{
                 const tickets = await getAllTicketsByUserID(user._id);
-                const filteredTickets = tickets.filter((ticket,index)=> ticket.active === false);
+                const filteredTickets = tickets.filter((ticket,index)=> ticket.active);
                 setUsersTickets(filteredTickets);
             }
             catch(error){
@@ -48,4 +48,4 @@ const CurrentUserSells = () => {
         </div>
     );
 };
-export default CurrentUserSells;
+export default CurrentUserOrders;
