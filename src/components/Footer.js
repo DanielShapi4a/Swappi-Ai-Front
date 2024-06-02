@@ -14,7 +14,7 @@ function Footer() {
           </ul>
         </div>
         <div className="row" style={{color:'#fff'}}>
-          SWAPPI Copyright © 2022 Swappi - All rights reserved || Designed By: SwappI-AI Team
+          SWAPPI Copyright © 2024 Swappi - All rights reserved || Designed By: SwappI-AI Team
         </div>
       </div>
     </footer>
