@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Ticket from "../../components/Categories/Ticket.js";
 import { useLocation } from "react-router-dom";
 import "./SearchResultPage.css";
