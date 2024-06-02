@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navigation Bar/Navbar";
-import CustomDiv from "../../components/Main Section Area/CustomDiv";
+import HeroDiv from "../../components/Main Section Area/HeroDiv.jsx";
 import "./MainPage.css";
 import { MainContent } from "../../assets/styles";
 import CategoryGrid from "../../components/Categories/CategoryGrid";
@@ -35,7 +35,7 @@ function MainPage() {
     <div className="main-page">
       <Navbar userData={user} style={{ marginBottom: "100px" }} /> {/* Pass user data to Navbar */}
       <MainContent>
-        <CustomDiv /> {/* Main Area of the site where we generate a picture */}
+        <HeroDiv /> {/* Main Area of the site where we generate a picture */}
         <HotOffer onCategoryChange={handleCategoryChange} />
         <CategoryGrid selectedCategory={selectedCategory}/>
         {/* <div className="ProductGridContainer">

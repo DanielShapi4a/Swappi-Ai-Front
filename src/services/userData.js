@@ -113,7 +113,3 @@ export async function editUserProfile(id, data, avatarData) {
   });
 }
 
-// function to logout the user 
-export async function logoutUser() {
-  await axios.get(`${API_URL}/auth/logout`, { withCredentials: true });
-}
