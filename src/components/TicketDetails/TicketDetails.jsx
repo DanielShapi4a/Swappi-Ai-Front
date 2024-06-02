@@ -103,15 +103,15 @@ function TicketDetails() {
             <p className="ticket-details-details" style={{ marginTop: "8rem", fontWeight: "500" }}>
               Seller: {ticket.seller.name}
             </p>
-            {user._id === ticket.seller ? (
+            {user && user._id === ticket.seller ? (
               <Link className="ticket-edit-button" to="/sells/" state={ticket}>
               Edit
               </Link>
-            ) : (
+            ) : user ? (
               <div style={{ display: "flex", justifyContent: "space-evenly" }}>
                 <button className="ticket-button-buy" onClick={()=>handleBuyTicket()}>Buy Ticket</button>
               </div>
-            )}
+            ) : <></>}
           </div>
         )}
       </div>
