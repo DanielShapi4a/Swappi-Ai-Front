@@ -38,6 +38,7 @@ const SignInPage = ({ setUserData }) => {
       if (result.status === 201) {
         setTimeout(() => {
           navigate("/");
+          setSignInError("");
         }, 2000);
       } else {
         // Handle sign-in error

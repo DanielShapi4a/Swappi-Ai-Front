@@ -13,7 +13,7 @@ const CurrentUserOrders = () => {
         const fetchUserTickets = async () => {
             try{
                 const tickets = await getAllTicketsByUserID(user._id);
-                const filteredTickets = tickets.filter((ticket,index)=> ticket.active);
+                const filteredTickets = tickets.filter((ticket,index)=> ticket.active === false);
                 setUsersTickets(filteredTickets);
             }
             catch(error){

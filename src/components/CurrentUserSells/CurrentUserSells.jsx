@@ -13,7 +13,7 @@ const CurrentUserSells = () => {
         const fetchUserTickets = async () => {
             try{
                 const tickets = await getAllTicketsByUserID(user._id);
-                const filteredTickets = tickets.filter((ticket,index)=> ticket.active === false);
+                const filteredTickets = tickets.filter((ticket,index)=> ticket.active === true);
                 setUsersTickets(filteredTickets);
             }
             catch(error){
