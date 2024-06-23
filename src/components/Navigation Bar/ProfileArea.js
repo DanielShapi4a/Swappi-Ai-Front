@@ -11,7 +11,9 @@ const ProfileArea = () => {
   const { user, setUser } = useAuth();
 
   const handleLoginSuccess = (userData) => {
-    setUser(userData);
+    if (userData._id) {
+      setUser(userData);
+    }
     setLoginModalOpen(false); // Close the login modal
   };
 
@@ -30,11 +32,7 @@ const ProfileArea = () => {
 
   return (
     <div className="profile-area" style={{ display: "flex", alignItems: "center" }}>
-      <Avatar
-        src={user ? user.avatar || defaultProfileImage : defaultProfileImage}
-        alt="User Avatar"
-        size="48px"
-      />
+      <Avatar src={user ? user.avatar || defaultProfileImage : defaultProfileImage} alt="User Avatar" size="48px" />
       <>
         {user ? (
           <>
