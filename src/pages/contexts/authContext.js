@@ -15,14 +15,15 @@ export const AuthProvider = ({ children }) => {
     try {
       const loggedInres = await axios.get(`${API_URL}/auth/loggedIn`, { withCredentials: true });
       setUserState(loggedInres.data);
+      axios.defaults.withCredentials = true;
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error("Error fetching user data:", error);
     }
   };
 
   useEffect(() => {
     getLoggedIn();
-  }, [user]);
+  }, []);
 
   return <AuthContext.Provider value={{ user, setUser: setUserState }}>{children}</AuthContext.Provider>;
 };

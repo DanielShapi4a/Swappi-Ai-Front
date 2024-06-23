@@ -49,7 +49,6 @@ export async function getAllTicketsByUserID(id) {
   }
 }
 
-
 // fucntion to get a spesific ticket via its id
 export async function getSpecific(id) {
   const response = await fetch(`${API_URL}/tickets/getTicket/${id}`, { credentials: "include" });
@@ -65,7 +64,7 @@ export const createTicket = async (user, ticketData) => {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      withCredential: "include",
       data: ticketData,
     });
     if (res.status === 201) {
@@ -81,7 +80,7 @@ export const createTicket = async (user, ticketData) => {
 
 // function to update the tickets data via tickets ID
 export const updateTicket = async (user, ticketId, ticketData) => {
-  ticketData = {...ticketData,"seller":user._id}
+  ticketData = { ...ticketData, seller: user._id };
   try {
     const res = await axios.put(`${API_URL}/tickets/updateTicket/${ticketId}`, {
       method: "PUT",
@@ -104,34 +103,36 @@ export const updateTicket = async (user, ticketId, ticketData) => {
 
 // function to search for users input in the navbar
 export const searchTicket = async (searchString) => {
-  try{
+  try {
     const response = await axios.get(`${API_URL}/tickets/search/`, {
-      params: { q: searchString }
+      params: { q: searchString },
     });
     return response.data;
-  } catch(error){
+  } catch (error) {
     console.log(error.response.data);
-    return ;
+    return;
   }
 };
 
 // function to make a transaction between a ticket and a user
 export const buyTicket = async (userId, ticketId) => {
-  try{
-    const res = await axios.put(`${API_URL}/tickets/buyTicket/${ticketId}`, {userId} ,{
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredential: true,
-    });
-    console.log("response is:",res);
-
-  } catch(error){
+  try {
+    const res = await axios.put(
+      `${API_URL}/tickets/buyTicket/${ticketId}`,
+      { userId },
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredential: true,
+      }
+    );
+    console.log("response is:", res);
+  } catch (error) {
     console.log("Error while buying ticket", error);
   }
-}
-
+};
 
 // export async function activateSell(id) {
 //   return (await fetch(`${API_URL}/tickets/enable/${id}`)).json();

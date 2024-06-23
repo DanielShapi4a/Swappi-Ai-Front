@@ -36,6 +36,7 @@ export async function loginUser(email, password) {
 
     const result = await response.json();
     if (response.ok) {
+      axios.defaults.withCredentials = true;
       // Successful login
       return {
         success: true,
@@ -100,16 +101,14 @@ export async function getUser() {
 //   );
 // }
 
-
 // funciton to edit the users data based on users input
 export async function editUserProfile(id, data, avatarData) {
   const formData = new FormData();
-  formData.append('userData', JSON.stringify(data));
-  formData.append('avatar', avatarData || "");
+  formData.append("userData", JSON.stringify(data));
+  formData.append("avatar", avatarData || "");
   return await axios.put(`${API_URL}/users/updateUser/${id}`, formData, {
     headers: {
-      'Content-Type': 'multipart/form-data'
-    }
+      "Content-Type": "multipart/form-data",
+    },
   });
 }
-
